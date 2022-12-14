@@ -1,3 +1,4 @@
+<img src="https://media.giphy.com/media/3oEjHDt3AyoN1CLxyU/giphy.gif" width="100%"/>
 WHY NOT A GIF HERE? TO SET THE MODE.
 
 # Island name
