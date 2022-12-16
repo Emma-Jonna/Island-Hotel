@@ -1,11 +1,10 @@
 <img src="https://media.giphy.com/media/3oEjHDt3AyoN1CLxyU/giphy.gif" width="100%"/>
-WHY NOT A GIF HERE? TO SET THE MODE.
 
-# Island name
+# Isle of Sgàil
 
 Some text about your lovely island
 
-# Hotel name
+# The Burnwood Estate
 
 Why not add some info about the hotel of your dreams?
 
