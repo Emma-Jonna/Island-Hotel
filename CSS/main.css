@@ -1,3 +1,13 @@
 img {
   width: 100%;
 }
+
+.room img {
+  width: 50%;
+}
+
+.economy,
+.standard,
+.luxury {
+  display: flex;
+}
