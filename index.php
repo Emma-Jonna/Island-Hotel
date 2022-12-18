@@ -281,6 +281,28 @@
             </div>
         </div>
 
+        <form action="">
+            <label for="room">Room</label>
+            <select name="" id="">
+                <option value="">Economy</option>
+                <option value="">Standard</option>
+                <option value="">Luxury</option>
+            </select>
+
+            <label for="arrival">Arrival</label>
+            <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+
+            <label for="departure">Departure</label>
+            <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+
+            <label for="transfercode">Transfercode</label>
+            <input type="text">
+
+            <button type="submit">
+                Make reservation
+            </button>
+        </form>
+
     </main>
 
     <footer>
