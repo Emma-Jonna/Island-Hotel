@@ -11,9 +11,3 @@ img {
 .luxury {
   display: flex;
 }
-
-form {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}

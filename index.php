@@ -36,7 +36,9 @@
     <header>
         <nav>
             <ul>
-                <li></li>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
             </ul>
         </nav>
     </header>
@@ -288,6 +290,17 @@
                 <option value="">Standard</option>
                 <option value="">Luxury</option>
             </select>
+
+            <div class="features">
+                <input type="checkbox">
+                <label for="features">Breakfast Buffet</label>
+
+                <input type="checkbox">
+                <label for="features">Castle Tour</label>
+
+                <input type="checkbox">
+                <label for="features">Snacks Cabinet</label>
+            </div>
 
             <label for="arrival">Arrival</label>
             <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
