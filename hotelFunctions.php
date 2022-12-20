@@ -21,12 +21,32 @@ function connect(string $dbName): object
         $db = new PDO($db);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        echo "Connected to the database";
     } catch (PDOException $e) {
         echo "Failed to connect to the database";
         throw $e;
     }
     return $db;
 }
+
+$dbName = 'database.db';
+
+$db = connect($dbName);
+
+$statement = $db->prepare('SELECT * FROM pricelist');
+
+$statement->execute();
+
+$pricelist = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($pricelist as $name) {
+    echo "<br>" . $name['name'] . "<br>";
+}
+
+
+// print_r($connect);
+
+// echo $connect;
 
 function guidv4(string $data = null): string
 {

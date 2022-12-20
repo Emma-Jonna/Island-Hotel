@@ -1,3 +1,8 @@
+<?php
+require("./hotelFunctions.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +10,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/global.css">
-    <link rel="stylesheet" href="/CSS/main.css">
-    <link rel="stylesheet" href="/CSS/typography.css">
-    <link rel="stylesheet" href="/CSS/fonts.css">
+    <link rel="stylesheet" href="./CSS/global.css">
+    <link rel="stylesheet" href="./CSS/main.css">
+    <link rel="stylesheet" href="./CSS/typography.css">
+    <link rel="stylesheet" href="./CSS/fonts.css">
     <title>Hotel</title>
 </head>
 
@@ -45,7 +50,7 @@
 
     <main>
         <div class="hero">
-            <img src="/Images/le-mont-saint-michel-by-night.jpg" alt="">
+            <img src="./Images/le-mont-saint-michel-by-night.jpg" alt="">
         </div>
         <div class="rooms">
             <div class="economy">
@@ -119,7 +124,7 @@
                 </div>
                 <div class="room">
                     <h3>Economy</h3>
-                    <img src="/Images/economic.jpg" alt="">
+                    <img src="./Images/economic.jpg" alt="">
                     <div class="description">
                         <p></p>
                     </div>
@@ -197,7 +202,7 @@
                 </div>
                 <div class="room">
                     <h3>Standard</h3>
-                    <img src="/Images/standard.jpg" alt="">
+                    <img src="./Images/standard.jpg" alt="">
                     <div class="description">
                         <p></p>
                     </div>
@@ -275,7 +280,7 @@
                 </div>
                 <div class="room">
                     <h3>Luxury</h3>
-                    <img src="/Images/view.jpeg" alt="">
+                    <img src="./Images/view.jpeg" alt="">
                     <div class="description">
                         <p></p>
                     </div>
