@@ -1,37 +1,41 @@
 @font-face {
   font-family: 'UnifrakturCook';
   src: local('UnifrakturCook'),
-    url('./Fonts/UnifrakturCook/UnifrakturCook-Bold.woff2') format('woff2'),
-    url('./Fonts/UnifrakturCook/UnifrakturCook-Bold.woff') format('wuff');
+    url('/Fonts/UnifrakturCook/UnifrakturCook-Bold.woff2') format('woff2'),
+    url('/Fonts/UnifrakturCook/UnifrakturCook-Bold.woff') format('wuff');
   font-weight: 700;
 }
 
 @font-face {
   font-family: 'Vollkorn-Regular';
-  src: url('../Fonts/Vollkorn/Vollkorn-Regular.woff2') format('woff2'),
-    url('../Fonts/Vollkorn/Vollkorn-Regular.woff') format('wuff');
+  src: local('Vollkorn-Regular'),
+    url('/Fonts/Vollkorn/Vollkorn-Regular.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-Regular.woff') format('wuff');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Vollkorn-Regular-Italic';
-  src: url('../Fonts/Vollkorn/Vollkorn-Italic.woff2') format('woff2'),
-    url('../Fonts/Vollkorn/Vollkorn-Italic.woff') format('wuff');
+  src: local('Vollkorn-Regular-Italic'),
+    url('/Fonts/Vollkorn/Vollkorn-Italic.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-Italic.woff') format('wuff');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Vollkorn-Medium';
-  src: url('./Fonts/Vollkorn/Vollkorn-Medium.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-Medium.woff') format('wuff');
+  src: local('Vollkorn-Medium'),
+    url('/Fonts/Vollkorn/Vollkorn-Medium.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-Medium.woff') format('wuff');
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Vollkorn-Medium-Italic';
-  src: url('../Fonts/Vollkorn/Vollkorn-MediumItalic.woff2') format('woff2'),
-    url('../Fonts/Vollkorn/Vollkorn-MediumItalic.woff') format('wuff');
+  src: local('Vollkorn-Medium-Italic'),
+    url('/Fonts/Vollkorn/Vollkorn-MediumItalic.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-MediumItalic.woff') format('wuff');
   font-weight: 500;
   font-style: italic;
 }
@@ -39,16 +43,16 @@
 @font-face {
   font-family: 'Vollkorn-SemiBold';
   src: local('Vollkorn-SemiBold'),
-    url('./Fonts/Vollkorn/Vollkorn-SemiBold.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-SemiBold.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-SemiBold.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-SemiBold.woff') format('wuff');
   font-weight: 600;
 }
 
 @font-face {
   font-family: 'Vollkorn-SemiBold-Italic';
   src: local('Vollkorn-SemiBold-Italic'),
-    url('./Fonts/Vollkorn/Vollkorn-SemiBoldItalic.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-SemiBoldItalic.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-SemiBoldItalic.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-SemiBoldItalic.woff') format('wuff');
   font-weight: 600;
   font-style: italic;
 }
@@ -56,16 +60,16 @@
 @font-face {
   font-family: 'Vollkorn-Bold';
   src: local('Vollkorn-Bold'),
-    url('./Fonts/Vollkorn/Vollkorn-Bold.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-Bold.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-Bold.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-Bold.woff') format('wuff');
   font-weight: 700;
 }
 
 @font-face {
   font-family: 'Vollkorn-Bold-Italic';
   src: local('Vollkorn-Bold-Italic'),
-    url('./Fonts/Vollkorn/Vollkorn-BoldItalic.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-BoldItalic.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-BoldItalic.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-BoldItalic.woff') format('wuff');
   font-weight: 700;
   font-style: italic;
 }
@@ -73,16 +77,16 @@
 @font-face {
   font-family: 'Vollkorn-ExtraBold';
   src: local('Vollkorn-ExtraBold'),
-    url('./Fonts/Vollkorn/Vollkorn-ExtraBold.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-ExtraBold.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-ExtraBold.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-ExtraBold.woff') format('wuff');
   font-weight: 800;
 }
 
 @font-face {
   font-family: 'Vollkorn-ExtraBold-Italic';
   src: local('Vollkorn-ExtraBold-Italic'),
-    url('./Fonts/Vollkorn/Vollkorn-ExtraBoldItalic.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-ExtraBoldItalic.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-ExtraBoldItalic.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-ExtraBoldItalic.woff') format('wuff');
   font-weight: 800;
   font-style: italic;
 }
@@ -90,16 +94,16 @@
 @font-face {
   font-family: 'Vollkorn-Black';
   src: local('Vollkorn-Black'),
-    url('./Fonts/Vollkorn/Vollkorn-Black.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-Black.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-Black.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-Black.woff') format('wuff');
   font-weight: 900;
 }
 
 @font-face {
   font-family: 'Vollkorn-Black-Italic';
   src: local('Vollkorn-Black-Italic'),
-    url('./Fonts/Vollkorn/Vollkorn-BlackItalic.woff2') format('woff2'),
-    url('./Fonts/Vollkorn/Vollkorn-BlackItalic.woff') format('wuff');
+    url('/Fonts/Vollkorn/Vollkorn-BlackItalic.woff2') format('woff2'),
+    url('/Fonts/Vollkorn/Vollkorn-BlackItalic.woff') format('wuff');
   font-weight: 900;
   font-style: italic;
 }
