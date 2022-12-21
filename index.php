@@ -129,25 +129,6 @@ require("./hotelFunctions.php");
                         <p>1$</p>
                     </div>
                 </div>
-                <!-- <form action="">
-                    <div class="features">
-                        <input type="checkbox">
-                        <label for="features">Breakfast Buffet</label>
-
-                        <input type="checkbox">
-                        <label for="features">Castle Tour</label>
-
-                        <input type="checkbox">
-                        <label for="features">Snacks Cabinet</label>
-                    </div>
-
-                    <label for="arrival">Arrival</label>
-                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
-
-                    <label for="departure">Departure</label>
-                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
-
-                </form> -->
             </div>
 
             <div class="standard">
@@ -221,30 +202,11 @@ require("./hotelFunctions.php");
                 </div>
                 <div class="room">
                     <h3>Standard</h3>
-                    <img src="./Images/standard.jpg" alt="">
+                    <img src="./Images/standard.jpeg" alt="">
                     <div class="description">
                         <p>2$</p>
                     </div>
                 </div>
-                <!-- <form action="">
-                    <div class="features">
-                        <input type="checkbox">
-                        <label for="features">Breakfast Buffet</label>
-
-                        <input type="checkbox">
-                        <label for="features">Castle Tour</label>
-
-                        <input type="checkbox">
-                        <label for="features">Snacks Cabinet</label>
-                    </div>
-
-                    <label for="arrival">Arrival</label>
-                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
-
-                    <label for="departure">Departure</label>
-                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
-
-                </form> -->
             </div>
 
             <div class="luxury">
@@ -323,25 +285,6 @@ require("./hotelFunctions.php");
                         <p>4$</p>
                     </div>
                 </div>
-                <!-- <form action="./hotelFunctions.php" method="POST">
-                    <div class="features">
-                        <input type="checkbox" name="luxuryBreakfast">
-                        <label for="features">Breakfast Buffet</label>
-
-                        <input type="checkbox" name="LuxuryTour">
-                        <label for="features">Castle Tour</label>
-
-                        <input type="checkbox" name="LuxurySnacks">
-                        <label for="features">Snacks Cabinet</label>
-                    </div>
-
-                    <label for="arrival">Arrival</label>
-                    <input type="date" name="arrivalLuxury" id="" min="2023-01-01" max="2023-01-31">
-
-                    <label for="departure">Departure</label>
-                    <input type="date" name="departureLuxury" id="" min="2023-01-01" max="2023-01-31">
-
-                </form> -->
             </div>
         </div>
 
