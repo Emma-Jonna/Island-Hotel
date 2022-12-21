@@ -43,10 +43,10 @@ foreach ($pricelist as $name) {
     echo "<br>" . $name['name'] . "<br>";
 }
 
-
 // print_r($connect);
 
 // echo $connect;
+
 
 function guidv4(string $data = null): string
 {

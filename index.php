@@ -129,6 +129,25 @@ require("./hotelFunctions.php");
                         <p></p>
                     </div>
                 </div>
+                <!-- <form action="">
+                    <div class="features">
+                        <input type="checkbox">
+                        <label for="features">Breakfast Buffet</label>
+
+                        <input type="checkbox">
+                        <label for="features">Castle Tour</label>
+
+                        <input type="checkbox">
+                        <label for="features">Snacks Cabinet</label>
+                    </div>
+
+                    <label for="arrival">Arrival</label>
+                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+
+                    <label for="departure">Departure</label>
+                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+
+                </form> -->
             </div>
 
             <div class="standard">
@@ -207,6 +226,25 @@ require("./hotelFunctions.php");
                         <p></p>
                     </div>
                 </div>
+                <!-- <form action="">
+                    <div class="features">
+                        <input type="checkbox">
+                        <label for="features">Breakfast Buffet</label>
+
+                        <input type="checkbox">
+                        <label for="features">Castle Tour</label>
+
+                        <input type="checkbox">
+                        <label for="features">Snacks Cabinet</label>
+                    </div>
+
+                    <label for="arrival">Arrival</label>
+                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+
+                    <label for="departure">Departure</label>
+                    <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+
+                </form> -->
             </div>
 
             <div class="luxury">
@@ -285,33 +323,52 @@ require("./hotelFunctions.php");
                         <p></p>
                     </div>
                 </div>
+                <!-- <form action="./hotelFunctions.php" method="POST">
+                    <div class="features">
+                        <input type="checkbox" name="luxuryBreakfast">
+                        <label for="features">Breakfast Buffet</label>
+
+                        <input type="checkbox" name="LuxuryTour">
+                        <label for="features">Castle Tour</label>
+
+                        <input type="checkbox" name="LuxurySnacks">
+                        <label for="features">Snacks Cabinet</label>
+                    </div>
+
+                    <label for="arrival">Arrival</label>
+                    <input type="date" name="arrivalLuxury" id="" min="2023-01-01" max="2023-01-31">
+
+                    <label for="departure">Departure</label>
+                    <input type="date" name="departureLuxury" id="" min="2023-01-01" max="2023-01-31">
+
+                </form> -->
             </div>
         </div>
 
-        <form action="">
+        <form action="./hotelFunctions.php" method="GET">
             <label for="room">Room</label>
-            <select name="" id="">
-                <option value="">Economy</option>
-                <option value="">Standard</option>
-                <option value="">Luxury</option>
+            <select name="room">
+                <option value="economy">Economy</option>
+                <option value="standard">Standard</option>
+                <option value="luxury">Luxury</option>
             </select>
 
             <div class="features">
-                <input type="checkbox">
+                <input type="checkbox" name="features[]" value="breakfast">
                 <label for="features">Breakfast Buffet</label>
 
-                <input type="checkbox">
+                <input type="checkbox" name="features[]" value="tour">
                 <label for="features">Castle Tour</label>
 
-                <input type="checkbox">
+                <input type="checkbox" name="features[]" value="snacks">
                 <label for="features">Snacks Cabinet</label>
             </div>
 
             <label for="arrival">Arrival</label>
-            <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+            <input type="date" name="arrival" min="2023-01-01" max="2023-01-31">
 
             <label for="departure">Departure</label>
-            <input type="date" name="" id="" min="2023-01-01" max="2023-01-31">
+            <input type="date" name="departure" min="2023-01-01" max="2023-01-31">
 
             <label for="transfercode">Transfercode</label>
             <input type="text">
