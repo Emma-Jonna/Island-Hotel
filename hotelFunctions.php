@@ -41,7 +41,7 @@ $pricelist = $statement->fetchAll(PDO::FETCH_ASSOC);
 foreach ($pricelist as $name) {
     echo "<br>" . $name['name'] . "<br>";
 } */
-function createBooking(int $arrivalDate, int $departureDate, int $roomNb, string $name)
+function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name)
 {
     $dbName = 'database.db';
 
@@ -49,22 +49,34 @@ function createBooking(int $arrivalDate, int $departureDate, int $roomNb, string
 
     $statement1 = $db->prepare(
         "INSERT INTO reservations (arrival_date, departure_date, room)
-    VALUES ('2023-01-02', '2023-01-05', 3);"
+    VALUES (?, ?, ?);"
     );
+
+    $statement1->bindParam(1, $arrivalDate, PDO::PARAM_STR);
+    $statement1->bindParam(2, $departureDate, PDO::PARAM_STR);
+    $statement1->bindParam(3, $roomNumber, PDO::PARAM_INT);
 
     $statement1->execute();
 
+    $inserted_id = $db->lastInsertId();
+
     $statement2 = $db->prepare(
         "INSERT INTO reservation_features (reservation_id, type_id)
-    VALUES (2, 3);"
+    VALUES (?, ?);"
     );
+
+    $statement2->bindParam(1, $inserted_id, PDO::PARAM_INT);
+    $statement2->bindParam(2, $roomNumber, PDO::PARAM_INT);
 
     $statement2->execute();
 
     $statement3 = $db->prepare(
         "INSERT INTO user_data (name, total_cost, reservations_id, transfercode)
-    VALUES ('johanna', 4, 2, 'ifjesriojfioesrjgeios');"
+    VALUES (?, 4, ?, 'ifjesriojfioesrjgeios');"
     );
+
+    $statement3->bindParam(1, $name, PDO::PARAM_STR);
+    $statement3->bindParam(2, $inserted_id, PDO::PARAM_INT);
 
     $statement3->execute();
 }
