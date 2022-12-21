@@ -126,7 +126,7 @@ require("./hotelFunctions.php");
                     <h3>Economy</h3>
                     <img src="./Images/economic.jpg" alt="">
                     <div class="description">
-                        <p></p>
+                        <p>1$</p>
                     </div>
                 </div>
                 <!-- <form action="">
@@ -223,7 +223,7 @@ require("./hotelFunctions.php");
                     <h3>Standard</h3>
                     <img src="./Images/standard.jpg" alt="">
                     <div class="description">
-                        <p></p>
+                        <p>2$</p>
                     </div>
                 </div>
                 <!-- <form action="">
@@ -320,7 +320,7 @@ require("./hotelFunctions.php");
                     <h3>Luxury</h3>
                     <img src="./Images/view.jpeg" alt="">
                     <div class="description">
-                        <p></p>
+                        <p>4$</p>
                     </div>
                 </div>
                 <!-- <form action="./hotelFunctions.php" method="POST">
@@ -346,29 +346,35 @@ require("./hotelFunctions.php");
         </div>
 
         <form action="./validateBooking.php" method="GET">
+            <label for="name">Please enter your full name</label>
+            <input type="text" name="name">
+
             <label for="room">Room</label>
             <select name="room">
-                <option value="economy">Economy</option>
-                <option value="standard">Standard</option>
-                <option value="luxury">Luxury</option>
+                <option value="economy" id="economy">Economy</option>
+                <option value="standard" id="standard">Standard</option>
+                <option value="luxury" id="luxury">Luxury</option>
             </select>
 
             <div class="features">
-                <input type="checkbox" name="features[]" value="breakfast">
+                <input type="checkbox" name="features[]" value="breakfast" id="breakfast">
                 <label for="features">Breakfast Buffet</label>
+                <p>2$</p>
 
-                <input type="checkbox" name="features[]" value="tour">
+                <input type="checkbox" name="features[]" value="tour" id="tour">
                 <label for="features">Castle Tour</label>
+                <p>1$</p>
 
-                <input type="checkbox" name="features[]" value="snacks">
+                <input type="checkbox" name="features[]" value="snacks" id="tour">
                 <label for="features">Snacks Cabinet</label>
+                <p>3$</p>
             </div>
 
             <label for="arrival">Arrival</label>
-            <input type="date" name="arrival" min="2023-01-01" max="2023-01-31">
+            <input type="date" name="arrival" min="2023-01-01" max="2023-01-31" id="arrival">
 
             <label for="departure">Departure</label>
-            <input type="date" name="departure" min="2023-01-01" max="2023-01-31">
+            <input type="date" name="departure" min="2023-01-01" max="2023-01-31" id="departure">
 
             <label for="transfercode">Transfercode</label>
             <input type="text">
@@ -385,5 +391,6 @@ require("./hotelFunctions.php");
     </footer>
 
 </body>
+<script src="./script.js"></script>
 
 </html>

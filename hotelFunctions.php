@@ -29,9 +29,8 @@ function connect(string $dbName): object
     return $db;
 }
 
-$dbName = 'database.db';
 
-$db = connect($dbName);
+/* $db = connect($dbName);
 
 $statement = $db->prepare('SELECT * FROM pricelist');
 
@@ -41,11 +40,35 @@ $pricelist = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($pricelist as $name) {
     echo "<br>" . $name['name'] . "<br>";
+} */
+function createBooking(int $arrivalDate, int $departureDate, int $roomNb, string $name)
+{
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    $statement1 = $db->prepare(
+        "INSERT INTO reservations (arrival_date, departure_date, room)
+    VALUES ('2023-01-02', '2023-01-05', 3);"
+    );
+
+    $statement1->execute();
+
+    $statement2 = $db->prepare(
+        "INSERT INTO reservation_features (reservation_id, type_id)
+    VALUES (2, 3);"
+    );
+
+    $statement2->execute();
+
+    $statement3 = $db->prepare(
+        "INSERT INTO user_data (name, total_cost, reservations_id, transfercode)
+    VALUES ('johanna', 4, 2, 'ifjesriojfioesrjgeios');"
+    );
+
+    $statement3->execute();
 }
 
-// print_r($connect);
-
-// echo $connect;
 
 
 function guidv4(string $data = null): string
