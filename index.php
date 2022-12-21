@@ -345,7 +345,7 @@ require("./hotelFunctions.php");
             </div>
         </div>
 
-        <form action="./hotelFunctions.php" method="GET">
+        <form action="./validateBooking.php" method="GET">
             <label for="room">Room</label>
             <select name="room">
                 <option value="economy">Economy</option>
