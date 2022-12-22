@@ -304,15 +304,15 @@ require("./hotelFunctions.php");
             </select>
 
             <div class="features">
-                <input type="checkbox" name="features[]" value="breakfast" id="1">
+                <input type="checkbox" name="features[]" value="4" id="breakfast">
                 <label for="features">Breakfast Buffet</label>
                 <p>2$</p>
 
-                <input type="checkbox" name="features[]" value="tour" id="2">
+                <input type="checkbox" name="features[]" value="5" id="tour">
                 <label for="features">Castle Tour</label>
                 <p>1$</p>
 
-                <input type="checkbox" name="features[]" value="snacks" id="3">
+                <input type="checkbox" name="features[]" value="6" id="snacks">
                 <label for="features">Snacks Cabinet</label>
                 <p>3$</p>
             </div>

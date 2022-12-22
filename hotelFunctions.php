@@ -31,6 +31,28 @@ function connect(string $dbName): object
     return $db;
 }
 
+function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
+{
+
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    for ($i = 0; $i < $numberOfFeatures; $i++) {
+        $statement = $db->prepare(
+            "INSERT INTO reservation_features (reservation_id, type_id)
+            VALUES (?, ?);"
+        );
+
+        $statement->bindParam(1, $inserted_id, PDO::PARAM_STR);
+        $statement->bindParam(2, $featuresArray[$i], PDO::PARAM_STR);
+
+        $statement->execute();
+
+        echo "hello";
+    }
+}
+
 function createReservation(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, float $totalCost)
 {
     $dbName = 'database.db';
@@ -71,21 +93,6 @@ function createReservation(string $arrivalDate, string $departureDate, int $room
     $statement3->bindParam(4, $transfercode, PDO::PARAM_STR);
 
     $statement3->execute();
-
-    /* for ($i = 0; $i < $numberOfFeatures; $i++) {
-        $statement4 = $db->prepare(
-            "INSERT INTO reservation_features (reservation_id, type_id)
-            VALUES (?, ?);"
-        );
-
-        $statement4->bindParam(1, $inserted_id, PDO::PARAM_STR);
-        $statement4->bindParam(2, $featuresArray[$i], PDO::PARAM_STR);
-
-        $statement1->execute();
-
-        echo "hello";
-    } */
-
 
     return $inserted_id;
 }
