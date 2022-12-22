@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /* 
 Here's something to start your career as a hotel manager.
 
@@ -29,21 +31,8 @@ function connect(string $dbName): object
     return $db;
 }
 
-
-/* $db = connect($dbName);
-
-$statement = $db->prepare('SELECT * FROM pricelist');
-
-$statement->execute();
-
-$pricelist = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($pricelist as $name) {
-    echo "<br>" . $name['name'] . "<br>";
-} */
-function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, int $numberOfFeatures, array $featuresArray)
+function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, int $totalCost, int $numberOfFeatures, array $featuresArray)
 {
-
     $dbName = 'database.db';
 
     $db = connect($dbName);
@@ -73,24 +62,27 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
 
     $statement3 = $db->prepare(
         "INSERT INTO user_data (name, total_cost, reservation_id, transfercode)
-    VALUES (?, 4, ?, ?);"
+    VALUES (?, ?, ?, ?);"
     );
 
     $statement3->bindParam(1, $name, PDO::PARAM_STR);
-    $statement3->bindParam(2, $inserted_id, PDO::PARAM_INT);
-    $statement3->bindParam(3, $transfercode, PDO::PARAM_STR);
+    $statement3->bindParam(2, $totalCost, PDO::PARAM_INT);
+    $statement3->bindParam(3, $inserted_id, PDO::PARAM_INT);
+    $statement3->bindParam(4, $transfercode, PDO::PARAM_STR);
 
     $statement3->execute();
+
+    return $inserted_id;
 }
 
-function receipt()
+function receipt($reservationId)
 {
 
     $dbName = 'database.db';
 
     $db = connect($dbName);
 
-    $statement = $db->query(
+    $statement = $db->prepare(
         "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST(rtrim(JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1, '.0') AS int) AS days_booked, info.additional_info
         FROM reservations
         INNER JOIN user_data
@@ -99,8 +91,14 @@ function receipt()
         on pricelist.id = reservations.room_id
         INNER JOIN info
         on reservations.info_id = info.id
-        WHERE reservations.id = 2;"
+        WHERE reservations.id = ?;"
     );
+
+    $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
+
+    $statement->execute();
+
+    // $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
 
     $receipt = $statement->fetch(PDO::FETCH_ASSOC);
 
