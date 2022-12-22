@@ -31,6 +31,29 @@ function connect(string $dbName): object
     return $db;
 }
 
+/* function calculateTotal($inserted_id)
+{
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    $statement = $db->prepare(
+        "SELECT SUM(pricelist.price) as total_cost
+        FROM reservation_features
+        INNER JOIN user_data
+        on reservation_features.reservation_id = user_data.reservation_id
+        INNER JOIN pricelist
+        on type_id = pricelist.id
+        WHERE user_data.reservation_id = 43;"
+    );
+
+    // $statement1->bindParam(1, $reservation_id, PDO::PARAM_STR);
+
+    $totalCost = $statement->execute();
+
+    return $totalCost;
+} */
+
 function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
 {
 
@@ -48,8 +71,6 @@ function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFea
         $statement->bindParam(2, $featuresArray[$i], PDO::PARAM_STR);
 
         $statement->execute();
-
-        echo "hello";
     }
 }
 

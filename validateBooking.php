@@ -27,7 +27,6 @@ if (isset($_GET['room'])) {
         } else {
             // checks wich room that is choosen
             if ($_GET['room'] === "budget") {
-
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
                 $roomNumber = 1;
@@ -35,7 +34,6 @@ if (isset($_GET['room'])) {
                 $transfercode = $_GET['transfercode'];
                 $roomPrice = 1;
             } elseif ($_GET['room'] === "standard") {
-
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
                 $roomNumber = 2;
@@ -43,7 +41,6 @@ if (isset($_GET['room'])) {
                 $transfercode = $_GET['transfercode'];
                 $roomPrice = 2;
             } elseif ($_GET['room'] === "luxury") {
-
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
                 $roomNumber = 3;
@@ -71,16 +68,6 @@ if (isset($_GET['room'])) {
 
             // checks wich features are choosen
             if (isset($_GET['features'])) {
-                /* if (in_array(1, $_GET['features'])) {
-                    // echo "you have choosen the breakfast feature" . "<br>";
-                }
-                if (in_array(2, $_GET['features'])) {
-                    // echo "you have choosen the tour feature" . "<br>";
-                }
-                if (in_array(3, $_GET['features'])) {
-                    // echo "you have choosen the snacks feature" . "<br>";
-                } */
-                // print_r($_GET['features']);
                 insertFeatures($insertId, $_GET['features'], count($_GET['features']));
             }
 
