@@ -27,14 +27,14 @@ if (isset($_GET['room'])) {
             echo "you can't leave before you arrive";
         } else {
             // checks wich room that is choosen
-            echo "you have booked a room" . "<br>";
+            // echo "you have booked a room" . "<br>";
             if ($_GET['room'] === "budget") {
-                echo "you have choosen the budget room" . "<br>";
+                /* echo "you have choosen the budget room" . "<br>";
                 echo $_GET['room'] . "<br>";
                 echo $_GET['name'] . "<br>";
                 echo $_GET['arrival'] . "<br>";
                 echo $_GET['departure'] . "<br>";
-                echo $_GET['transfercode'] . "<br>";
+                echo $_GET['transfercode'] . "<br>"; */
 
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
@@ -42,12 +42,12 @@ if (isset($_GET['room'])) {
                 $name = $_GET['name'];
                 $transfercode = $_GET['transfercode'];
             } elseif ($_GET['room'] === "standard") {
-                echo "you have choosen the standard room" . "<br>";
+                /* echo "you have choosen the standard room" . "<br>";
                 echo $_GET['room'] . "<br>";
                 echo $_GET['name'] . "<br>";
                 echo $_GET['arrival'] . "<br>";
                 echo $_GET['departure'] . "<br>";
-                echo $_GET['transfercode'] . "<br>";
+                echo $_GET['transfercode'] . "<br>"; */
 
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
@@ -55,12 +55,12 @@ if (isset($_GET['room'])) {
                 $name = $_GET['name'];
                 $transfercode = $_GET['transfercode'];
             } elseif ($_GET['room'] === "luxury") {
-                echo "you have choosen the luxury room" . "<br>";
+                /* echo "you have choosen the luxury room" . "<br>";
                 echo $_GET['room'] . "<br>";
                 echo $_GET['name'] . "<br>";
                 echo $_GET['arrival'] . "<br>";
                 echo $_GET['departure'] . "<br>";
-                echo $_GET['transfercode'] . "<br>";
+                echo $_GET['transfercode'] . "<br>"; */
 
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
@@ -71,17 +71,20 @@ if (isset($_GET['room'])) {
             // checks wich features are choosen
             if (isset($_GET['features'])) {
                 if (in_array("breakfast", $_GET['features'])) {
-                    echo "you have choosen the breakfast feature" . "<br>";
+                    // echo "you have choosen the breakfast feature" . "<br>";
                 }
                 if (in_array("tour", $_GET['features'])) {
-                    echo "you have choosen the tour feature" . "<br>";
+                    // echo "you have choosen the tour feature" . "<br>";
                 }
                 if (in_array("snacks", $_GET['features'])) {
-                    echo "you have choosen the snacks feature" . "<br>";
+                    // echo "you have choosen the snacks feature" . "<br>";
                 }
-                print_r($_GET['features']);
+                // print_r($_GET['features']);
             }
             createBooking($arrivalDate, $departureDate, $roomNumber, $name, $transfercode, count($_GET['features']), $_GET['features']);
+            // print_r(receipt());
+            header('Content-Type: application/json');
+            echo (json_encode(receipt()));
             // header("Location: ./index.php");
         }
     }

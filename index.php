@@ -300,15 +300,15 @@ require("./hotelFunctions.php");
             </select>
 
             <div class="features">
-                <input type="checkbox" name="features[]" value="breakfast" id="breakfast">
+                <input type="checkbox" name="features[]" value="breakfast" id="1">
                 <label for="features">Breakfast Buffet</label>
                 <p>2$</p>
 
-                <input type="checkbox" name="features[]" value="tour" id="tour">
+                <input type="checkbox" name="features[]" value="tour" id="2">
                 <label for="features">Castle Tour</label>
                 <p>1$</p>
 
-                <input type="checkbox" name="features[]" value="snacks" id="tour">
+                <input type="checkbox" name="features[]" value="snacks" id="3">
                 <label for="features">Snacks Cabinet</label>
                 <p>3$</p>
             </div>

@@ -21,7 +21,7 @@ function connect(string $dbName): object
         $db = new PDO($db);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        echo "Connected to the database";
+        // echo "Connected to the database";
     } catch (PDOException $e) {
         echo "Failed to connect to the database";
         throw $e;
@@ -43,13 +43,14 @@ foreach ($pricelist as $name) {
 } */
 function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, int $numberOfFeatures, array $featuresArray)
 {
+
     $dbName = 'database.db';
 
     $db = connect($dbName);
 
     $statement1 = $db->prepare(
-        "INSERT INTO reservations (arrival_date, departure_date, room)
-    VALUES (?, ?, ?);"
+        "INSERT INTO reservations (arrival_date, departure_date, room_id, info_id)
+    VALUES (?, ?, ?, 1);"
     );
 
     $statement1->bindParam(1, $arrivalDate, PDO::PARAM_STR);
@@ -71,7 +72,7 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
     $statement2->execute();
 
     $statement3 = $db->prepare(
-        "INSERT INTO user_data (name, total_cost, reservations_id, transfercode)
+        "INSERT INTO user_data (name, total_cost, reservation_id, transfercode)
     VALUES (?, 4, ?, ?);"
     );
 
@@ -81,6 +82,30 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
 
     $statement3->execute();
 }
+
+function receipt()
+{
+
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    $statement = $db->query(
+        "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST(rtrim(JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1, '.0') AS int) AS days_booked, info.additional_info
+        FROM reservations
+        INNER JOIN user_data
+        on reservations.id = user_data.reservation_id
+        INNER JOIN pricelist
+        on pricelist.id = reservations.room_id
+        INNER JOIN info
+        on reservations.info_id = info.id
+        WHERE reservations.id = 2;"
+    );
+
+    $receipt = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $receipt;
+};
 
 
 function guidv4(string $data = null): string
