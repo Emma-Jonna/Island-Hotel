@@ -25,35 +25,38 @@ if (isset($_GET['room'])) {
         } else {
             // checks wich room that is choosen
             echo "you have booked a room" . "<br>";
-            if ($_GET['room'] === "economy") {
-                echo "you have choosen the economic room" . "<br>";
+            if ($_GET['room'] === 1) {
+                echo "you have choosen the budget room" . "<br>";
                 echo $_GET['room'] . "<br>";
                 echo $_GET['name'] . "<br>";
                 echo $_GET['arrival'] . "<br>";
                 echo $_GET['departure'] . "<br>";
+
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
-                $roomNumber = 1;
+                $roomNumber = $_GET['room'];
                 $name = $_GET['name'];
-            } elseif ($_GET['room'] === "standard") {
+            } elseif ($_GET['room'] === 2) {
                 echo "you have choosen the standard room" . "<br>";
                 echo $_GET['room'] . "<br>";
                 echo $_GET['name'] . "<br>";
                 echo $_GET['arrival'] . "<br>";
                 echo $_GET['departure'] . "<br>";
+
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
-                $roomNumber = 2;
+                $roomNumber = $_GET['room'];
                 $name = $_GET['name'];
-            } elseif ($_GET['room'] === "luxury") {
+            } elseif ($_GET['room'] === 3) {
                 echo "you have choosen the luxury room" . "<br>";
                 echo $_GET['room'] . "<br>";
                 echo $_GET['name'] . "<br>";
                 echo $_GET['arrival'] . "<br>";
                 echo $_GET['departure'] . "<br>";
+
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
-                $roomNumber = 3;
+                $roomNumber = $_GET['room'];
                 $name = $_GET['name'];
             }
             // checks wich features are choosen

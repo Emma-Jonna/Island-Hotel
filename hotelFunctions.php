@@ -81,8 +81,6 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
     $statement3->execute();
 }
 
-echo "Hello";
-
 
 function guidv4(string $data = null): string
 {

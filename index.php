@@ -53,7 +53,7 @@ require("./hotelFunctions.php");
             <img src="./Images/le-mont-saint-michel-by-night.jpg" alt="">
         </div>
         <div class="rooms">
-            <div class="economy">
+            <div class="budget">
                 <div class="calendar">
                     <h2>January 2023</h2>
                     <table>
@@ -294,9 +294,9 @@ require("./hotelFunctions.php");
 
             <label for="room">Room</label>
             <select name="room">
-                <option value="economy" id="economy">Economy</option>
-                <option value="standard" id="standard">Standard</option>
-                <option value="luxury" id="luxury">Luxury</option>
+                <option value="1" id="budget">Economy</option>
+                <option value="2" id="standard">Standard</option>
+                <option value="3" id="luxury">Luxury</option>
             </select>
 
             <div class="features">
