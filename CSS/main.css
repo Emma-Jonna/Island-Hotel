@@ -12,3 +12,13 @@ img {
   display: flex;
   width: 50%;
 }
+
+.calendar table tbody {
+  background-color: var(--color-light-purple);
+  border-spacing: 0;
+  border-collapse: 0;
+}
+
+.weekdays {
+  background-color: var(--color-white);
+}

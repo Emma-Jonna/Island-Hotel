@@ -19,20 +19,14 @@ if (isset($_GET['room'])) {
         if ($_GET['transfercode'] === "") {
             echo "please enter a transfercode" . "<br>";
         }
+        // header("Location: ./index.php");
     } else {
         // checks to make sure you cant leave before you arrive
         if ($_GET['arrival'] > $_GET['departure']) {
             echo "you can't leave before you arrive";
         } else {
             // checks wich room that is choosen
-            // echo "you have booked a room" . "<br>";
             if ($_GET['room'] === "budget") {
-                /* echo "you have choosen the budget room" . "<br>";
-                echo $_GET['room'] . "<br>";
-                echo $_GET['name'] . "<br>";
-                echo $_GET['arrival'] . "<br>";
-                echo $_GET['departure'] . "<br>";
-                echo $_GET['transfercode'] . "<br>"; */
 
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
@@ -41,12 +35,6 @@ if (isset($_GET['room'])) {
                 $transfercode = $_GET['transfercode'];
                 $roomPrice = 1;
             } elseif ($_GET['room'] === "standard") {
-                /* echo "you have choosen the standard room" . "<br>";
-                echo $_GET['room'] . "<br>";
-                echo $_GET['name'] . "<br>";
-                echo $_GET['arrival'] . "<br>";
-                echo $_GET['departure'] . "<br>";
-                echo $_GET['transfercode'] . "<br>"; */
 
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
@@ -55,12 +43,6 @@ if (isset($_GET['room'])) {
                 $transfercode = $_GET['transfercode'];
                 $roomPrice = 2;
             } elseif ($_GET['room'] === "luxury") {
-                /* echo "you have choosen the luxury room" . "<br>";
-                echo $_GET['room'] . "<br>";
-                echo $_GET['name'] . "<br>";
-                echo $_GET['arrival'] . "<br>";
-                echo $_GET['departure'] . "<br>";
-                echo $_GET['transfercode'] . "<br>"; */
 
                 $arrivalDate = $_GET['arrival'];
                 $departureDate = $_GET['departure'];
@@ -91,8 +73,6 @@ if (isset($_GET['room'])) {
 
             $days = ($departure[2] - $arrival[2]) + 1;
 
-            // var_dump($days);
-
             if ($days > 2) {
                 $dayHalfPrice = $roomPrice / 2;
                 $totalCost = ($roomPrice * $days) - $dayHalfPrice;
@@ -100,11 +80,10 @@ if (isset($_GET['room'])) {
                 $totalCost = $roomPrice * $days;
             }
 
-            $insertId = createBooking($arrivalDate, $departureDate, $roomNumber, $name, $transfercode, $totalCost, count($_GET['features']), $_GET['features']);
+            $insertId = createReservation($arrivalDate, $departureDate, $roomNumber, $name, $transfercode, $totalCost);
             // print_r(receipt());
             header('Content-Type: application/json');
             echo (json_encode(receipt($insertId)));
-            // header("Location: ./index.php");
         }
     }
 }

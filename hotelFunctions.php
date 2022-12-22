@@ -31,7 +31,7 @@ function connect(string $dbName): object
     return $db;
 }
 
-function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, float $totalCost, int $numberOfFeatures, array $featuresArray)
+function createReservation(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, float $totalCost)
 {
     $dbName = 'database.db';
 
@@ -72,6 +72,21 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
 
     $statement3->execute();
 
+    /* for ($i = 0; $i < $numberOfFeatures; $i++) {
+        $statement4 = $db->prepare(
+            "INSERT INTO reservation_features (reservation_id, type_id)
+            VALUES (?, ?);"
+        );
+
+        $statement4->bindParam(1, $inserted_id, PDO::PARAM_STR);
+        $statement4->bindParam(2, $featuresArray[$i], PDO::PARAM_STR);
+
+        $statement1->execute();
+
+        echo "hello";
+    } */
+
+
     return $inserted_id;
 }
 
@@ -98,11 +113,25 @@ function receipt($reservationId)
 
     $statement->execute();
 
-    // $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
-
     $receipt = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $receipt;
+
+    /* $statement = $db->prepare(
+        "SELECT pricelist.name as feature
+        FROM reservation_features
+        INNER JOIN user_data
+        on reservation_features.reservation_id = user_data.reservation_id
+        INNER JOIN pricelist
+        on type_id = pricelist.id
+        WHERE user_data.reservation_id = 1 and pricelist.id > 3;"
+    );
+
+    $statement->execute();
+
+    $features = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    print_r($features); */
 };
 
 
