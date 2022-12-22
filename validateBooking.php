@@ -93,9 +93,12 @@ if (isset($_GET['room'])) {
 
             // var_dump($days);
 
-
-
-            $totalCost = $roomPrice * $days;
+            if ($days > 2) {
+                $dayHalfPrice = $roomPrice / 2;
+                $totalCost = ($roomPrice * $days) - $dayHalfPrice;
+            } else {
+                $totalCost = $roomPrice * $days;
+            }
 
             $insertId = createBooking($arrivalDate, $departureDate, $roomNumber, $name, $transfercode, $totalCost, count($_GET['features']), $_GET['features']);
             // print_r(receipt());

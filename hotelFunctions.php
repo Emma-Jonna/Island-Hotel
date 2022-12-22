@@ -31,7 +31,7 @@ function connect(string $dbName): object
     return $db;
 }
 
-function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, int $totalCost, int $numberOfFeatures, array $featuresArray)
+function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, float $totalCost, int $numberOfFeatures, array $featuresArray)
 {
     $dbName = 'database.db';
 
@@ -66,7 +66,7 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
     );
 
     $statement3->bindParam(1, $name, PDO::PARAM_STR);
-    $statement3->bindParam(2, $totalCost, PDO::PARAM_INT);
+    $statement3->bindParam(2, $totalCost, PDO::PARAM_STR);
     $statement3->bindParam(3, $inserted_id, PDO::PARAM_INT);
     $statement3->bindParam(4, $transfercode, PDO::PARAM_STR);
 
