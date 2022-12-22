@@ -294,9 +294,9 @@ require("./hotelFunctions.php");
 
             <label for="room">Room</label>
             <select name="room">
-                <option value="1" id="budget">Economy</option>
-                <option value="2" id="standard">Standard</option>
-                <option value="3" id="luxury">Luxury</option>
+                <option value="budget" id="1">Economy</option>
+                <option value="standard" id="2">Standard</option>
+                <option value="luxury" id="3">Luxury</option>
             </select>
 
             <div class="features">
@@ -320,7 +320,7 @@ require("./hotelFunctions.php");
             <input type="date" name="departure" min="2023-01-01" max="2023-01-31" id="departure">
 
             <label for="transfercode">Transfercode</label>
-            <input type="text">
+            <input type="text" name="transfercode">
 
             <button type="submit">
                 Make reservation

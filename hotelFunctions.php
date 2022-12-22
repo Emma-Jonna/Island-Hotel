@@ -41,7 +41,7 @@ $pricelist = $statement->fetchAll(PDO::FETCH_ASSOC);
 foreach ($pricelist as $name) {
     echo "<br>" . $name['name'] . "<br>";
 } */
-function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name)
+function createBooking(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, int $numberOfFeatures, array $featuresArray)
 {
     $dbName = 'database.db';
 
@@ -72,11 +72,12 @@ function createBooking(string $arrivalDate, string $departureDate, int $roomNumb
 
     $statement3 = $db->prepare(
         "INSERT INTO user_data (name, total_cost, reservations_id, transfercode)
-    VALUES (?, 4, ?, 'ifjesriojfioesrjgeios');"
+    VALUES (?, 4, ?, ?);"
     );
 
     $statement3->bindParam(1, $name, PDO::PARAM_STR);
     $statement3->bindParam(2, $inserted_id, PDO::PARAM_INT);
+    $statement3->bindParam(3, $transfercode, PDO::PARAM_STR);
 
     $statement3->execute();
 }
