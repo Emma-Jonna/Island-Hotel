@@ -1,5 +1,8 @@
 <?php
 require("./hotelFunctions.php");
+if (isset($_GET['submit'])) {
+    header("Location: ./validateBooking.php");
+}
 
 ?>
 
@@ -292,7 +295,7 @@ require("./hotelFunctions.php");
             </div>
         </div>
 
-        <form action="./validateBooking.php" method="GET">
+        <form action="./" method="GET">
             <label for="name">Please enter your full name</label>
             <input type="text" name="name">
 
@@ -326,7 +329,7 @@ require("./hotelFunctions.php");
             <label for="transfercode">Transfercode</label>
             <input type="text" name="transfercode">
 
-            <button type="submit">
+            <button type="submit" name="submit">
                 Make reservation
             </button>
         </form>
