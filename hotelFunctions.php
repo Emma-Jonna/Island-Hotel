@@ -56,6 +56,97 @@ function connect(string $dbName): object
 
 function noEmptyFields()
 {
+    require("./index.php");
+    $erros = [];
+    // checks if the arrival and departutre date is choosen
+    if ($_GET['arrival'] === "" || $_GET['departure'] === "" || $_GET['name'] === "" || $_GET['transfercode'] === "") {
+        if ($_GET['arrival'] === "") {
+            // echo "please choose arrival date" . "<br>";
+            $erros[] = "please choose arrival date";
+        }
+        if ($_GET['departure'] === "") {
+            // echo "please choose departure date" . "<br>";
+            $erros[] = "please choose departure date";
+        }
+        if ($_GET['name'] === "") {
+            // echo "please enter your name" . "<br>";
+            $erros[] = "please enter your name";
+        }
+        if ($_GET['transfercode'] === "") {
+            // echo "please enter a transfercode" . "<br>";
+            $erros[] = "please enter a transfercode";
+        }
+        if ($_GET['arrival'] > $_GET['departure']) {
+            // echo "you can't leave before you arrive";
+            $erros[] = "you can't leave before you arrive";
+        }
+
+        foreach ($erros as $error) {
+            echo $error . "<br>";
+        }
+    } else {
+        // checks wich room that is choosen
+        if ($_GET['room'] === "budget") {
+            $arrivalDate = $_GET['arrival'];
+            $departureDate = $_GET['departure'];
+            $roomNumber = 1;
+            $name = $_GET['name'];
+            $transfercode = $_GET['transfercode'];
+            $roomPrice = 1;
+        } elseif ($_GET['room'] === "standard") {
+            $arrivalDate = $_GET['arrival'];
+            $departureDate = $_GET['departure'];
+            $roomNumber = 2;
+            $name = $_GET['name'];
+            $transfercode = $_GET['transfercode'];
+            $roomPrice = 2;
+        } elseif ($_GET['room'] === "luxury") {
+            $arrivalDate = $_GET['arrival'];
+            $departureDate = $_GET['departure'];
+            $roomNumber = 3;
+            $name = $_GET['name'];
+            $transfercode = $_GET['transfercode'];
+            $roomPrice = 4;
+        }
+
+        $arrivalDate = $_GET['arrival'];
+        $departureDate = $_GET['departure'];
+
+        $arrival = explode("-", $arrivalDate);
+        $departure = explode("-", $departureDate);
+
+        $days = ($departure[2] - $arrival[2]) + 1;
+
+        if ($days > 2) {
+            $dayHalfPrice = $roomPrice / 2;
+            $totalCost = ($roomPrice * $days) - $dayHalfPrice;
+        } else {
+            $totalCost = $roomPrice * $days;
+        }
+
+        $status = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
+
+        // print_r(count($status));
+
+        if (count($status) === 0) {
+
+            $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
+
+            calcTotalCost($insertId, $name, $transfercode, $totalCost);
+
+            // checks wich features are choosen
+            if (isset($_GET['features'])) {
+                insertFeatures($insertId, $_GET['features'], count($_GET['features']));
+            }
+
+
+            // print_r(receipt());
+            header('Content-Type: application/json');
+            echo (json_encode(receipt($insertId)));
+        } else {
+            echo "The room is already booked";
+        }
+    }
 }
 
 function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber)
@@ -85,10 +176,6 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
     $statement->execute();
 
     $reservations =  $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    /* foreach ($reservations as $reservation) {
-        echo $reservation['arrival_date'];
-    } */
 
     return $reservations;
 }
@@ -142,7 +229,6 @@ function createReservation(string $arrivalDate, string $departureDate, int $room
 
     $statement2->execute();
 
-    // var_dump($inserted_id);
     return $inserted_id;
 }
 
@@ -163,22 +249,31 @@ function calcTotalCost(int $inserted_id, string $name, string $transfercode, flo
     $statement->bindParam(4, $transfercode, PDO::PARAM_STR);
 
     $statement->execute();
+}
 
-    /* $statement = $db->prepare(
-        "SELECT pricelist.name as feature
-        FROM reservation_features
-        INNER JOIN user_data
-        on reservation_features.reservation_id = user_data.reservation_id
-        INNER JOIN pricelist
-        on type_id = pricelist.id
-        WHERE user_data.reservation_id = 1 and pricelist.id > 3;"
+function showAvailability(int $room_id)
+{
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    $statement = $db->prepare(
+        "SELECT distinct *
+        FROM reservations
+        WHERE room_id = ?
+        ORDER BY arrival_date"
     );
+
+    $statement->bindParam(1, $room_id, PDO::PARAM_STR);
 
     $statement->execute();
 
-    $features = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $reservations =  $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    print_r($features); */
+    /* foreach ($reservations as $reservation) {
+        echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
+    } */
+    return $reservations;
 }
 
 function receipt($reservationId)

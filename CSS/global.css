@@ -7,3 +7,7 @@
   --color-light-purple: #7b5c75;
   --color-wine-red: #702632;
 }
+
+* {
+  margin: 0;
+}

@@ -18,6 +18,11 @@ require("./hotelFunctions.php");
 </head>
 
 <body>
+    <?php $reservations = showAvailability(1);
+    foreach ($reservations as $reservation) {
+        echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
+    }
+    ?>
     <div class="font-tests">
         <h1>UnifrakturCook</h1>
         <p class="one">Vollkorn-Regular</p>
