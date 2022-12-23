@@ -54,6 +54,10 @@ function connect(string $dbName): object
     return $totalCost;
 } */
 
+function noEmptyFields()
+{
+}
+
 function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
 {
 
@@ -74,7 +78,7 @@ function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFea
     }
 }
 
-function createReservation(string $arrivalDate, string $departureDate, int $roomNumber, string $name, string $transfercode, float $totalCost)
+function createReservation(string $arrivalDate, string $departureDate, int $roomNumber)
 {
     $dbName = 'database.db';
 
@@ -103,24 +107,47 @@ function createReservation(string $arrivalDate, string $departureDate, int $room
 
     $statement2->execute();
 
-    $statement3 = $db->prepare(
+    // var_dump($inserted_id);
+    return $inserted_id;
+}
+
+function calcTotalCost(int $inserted_id, string $name, string $transfercode, float $totalCost)
+{
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    $statement = $db->prepare(
         "INSERT INTO user_data (name, total_cost, reservation_id, transfercode)
     VALUES (?, ?, ?, ?);"
     );
 
-    $statement3->bindParam(1, $name, PDO::PARAM_STR);
-    $statement3->bindParam(2, $totalCost, PDO::PARAM_STR);
-    $statement3->bindParam(3, $inserted_id, PDO::PARAM_INT);
-    $statement3->bindParam(4, $transfercode, PDO::PARAM_STR);
+    $statement->bindParam(1, $name, PDO::PARAM_STR);
+    $statement->bindParam(2, $totalCost, PDO::PARAM_STR);
+    $statement->bindParam(3, $inserted_id, PDO::PARAM_INT);
+    $statement->bindParam(4, $transfercode, PDO::PARAM_STR);
 
-    $statement3->execute();
+    $statement->execute();
 
-    return $inserted_id;
+    /* $statement = $db->prepare(
+        "SELECT pricelist.name as feature
+        FROM reservation_features
+        INNER JOIN user_data
+        on reservation_features.reservation_id = user_data.reservation_id
+        INNER JOIN pricelist
+        on type_id = pricelist.id
+        WHERE user_data.reservation_id = 1 and pricelist.id > 3;"
+    );
+
+    $statement->execute();
+
+    $features = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    print_r($features); */
 }
 
 function receipt($reservationId)
 {
-
     $dbName = 'database.db';
 
     $db = connect($dbName);
@@ -144,22 +171,6 @@ function receipt($reservationId)
     $receipt = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $receipt;
-
-    /* $statement = $db->prepare(
-        "SELECT pricelist.name as feature
-        FROM reservation_features
-        INNER JOIN user_data
-        on reservation_features.reservation_id = user_data.reservation_id
-        INNER JOIN pricelist
-        on type_id = pricelist.id
-        WHERE user_data.reservation_id = 1 and pricelist.id > 3;"
-    );
-
-    $statement->execute();
-
-    $features = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    print_r($features); */
 };
 
 

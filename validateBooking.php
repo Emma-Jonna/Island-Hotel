@@ -64,7 +64,9 @@ if (isset($_GET['room'])) {
                 $totalCost = $roomPrice * $days;
             }
 
-            $insertId = createReservation($arrivalDate, $departureDate, $roomNumber, $name, $transfercode, $totalCost);
+            $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
+
+            calcTotalCost($insertId, $name, $transfercode, $totalCost);
 
             // checks wich features are choosen
             if (isset($_GET['features'])) {
