@@ -1,8 +1,5 @@
 <?php
 require("./hotelFunctions.php");
-if (isset($_GET['submit'])) {
-    header("Location: ./validateBooking.php");
-}
 
 ?>
 
@@ -295,7 +292,7 @@ if (isset($_GET['submit'])) {
             </div>
         </div>
 
-        <form action="./" method="GET">
+        <form action="./validateBooking.php" method="GET">
             <label for="name">Please enter your full name</label>
             <input type="text" name="name">
 

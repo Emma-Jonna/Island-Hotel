@@ -58,6 +58,41 @@ function noEmptyFields()
 {
 }
 
+function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber)
+{
+    $dbName = 'database.db';
+
+    $db = connect($dbName);
+
+    $statement = $db->prepare(
+        "SELECT * 
+        FROM reservations
+        WHERE room_id = ? AND 
+        (arrival_date <= ? 
+        or arrival_date < ?)
+        AND 
+        (departure_date > ? or
+        departure_date > ?)"
+    );
+
+    $statement->bindParam(1, $roomNumber, PDO::PARAM_INT);
+    $statement->bindParam(2, $arrivalDate, PDO::PARAM_STR);
+    $statement->bindParam(3, $departureDate, PDO::PARAM_STR);
+    $statement->bindParam(4, $arrivalDate, PDO::PARAM_STR);
+    $statement->bindParam(5, $departureDate, PDO::PARAM_STR);
+
+
+    $statement->execute();
+
+    $reservations =  $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    /* foreach ($reservations as $reservation) {
+        echo $reservation['arrival_date'];
+    } */
+
+    return $reservations;
+}
+
 function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
 {
 

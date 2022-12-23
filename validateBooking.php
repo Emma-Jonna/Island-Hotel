@@ -72,18 +72,27 @@ if (isset($_GET['room'])) {
             $totalCost = $roomPrice * $days;
         }
 
-        $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
+        $status = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
 
-        calcTotalCost($insertId, $name, $transfercode, $totalCost);
+        // print_r(count($status));
 
-        // checks wich features are choosen
-        if (isset($_GET['features'])) {
-            insertFeatures($insertId, $_GET['features'], count($_GET['features']));
+        if (count($status) === 0) {
+
+            $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
+
+            calcTotalCost($insertId, $name, $transfercode, $totalCost);
+
+            // checks wich features are choosen
+            if (isset($_GET['features'])) {
+                insertFeatures($insertId, $_GET['features'], count($_GET['features']));
+            }
+
+
+            // print_r(receipt());
+            header('Content-Type: application/json');
+            echo (json_encode(receipt($insertId)));
+        } else {
+            echo "The room is already booked";
         }
-
-
-        // print_r(receipt());
-        header('Content-Type: application/json');
-        echo (json_encode(receipt($insertId)));
     }
 }
