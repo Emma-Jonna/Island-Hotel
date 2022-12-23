@@ -18,8 +18,10 @@ require("./hotelFunctions.php");
 </head>
 
 <body>
-    <?php $reservations = showAvailability(1);
-    foreach ($reservations as $reservation) {
+    <?php $budget = showAvailability(1);
+    $standard = showAvailability(2);
+    $luxury = showAvailability(3);
+    foreach ($budget as $reservation) {
         echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
     }
     ?>
@@ -38,10 +40,6 @@ require("./hotelFunctions.php");
         <p class="eleven">Vollkorn-Black</p>
         <p class="twelve">Vollkorn-Black-Italic</p>
     </div>
-    <!-- <img src="/Images/le-mont-saint-michel-by-night.jpg" alt=""> -->
-    <!-- <img src="/Images/Best-Beaches-near-Mont-Saint-Michel.jpg" alt=""> -->
-    <!-- <img src="/Images/895_0_mon-sen-mishel-smapse1.jpg" alt=""> -->
-    <!-- <img src="/Images/castle.jpeg" alt=""> -->
 
     <header>
         <nav>
@@ -344,5 +342,72 @@ require("./hotelFunctions.php");
 
 </body>
 <script src="./script.js"></script>
+<script type="text/javascript">
+    const budgetBookings = <?php echo json_encode($budget) ?>;
+    const standardBookings = <?php echo json_encode($standard); ?>;
+    const luxuryBookings = <?php echo json_encode($luxury); ?>;
+    // console.log(budgetBookings, standardBookings, luxuryBookings);
+
+    const budgetDays = document.querySelectorAll('.budget td');
+    const standardDays = document.querySelectorAll('.standard td');
+    const luxuryDays = document.querySelectorAll('.luxury td');
+
+    const checkDays = (calendar) => {
+        for (let i = 0; i < calendar.length; i++) {
+            console.log(calendar[i].textContent);
+            if (calendar[i].textContent === '') {
+                calendar[i].style.backgroundColor = '#5a3e62';
+            }
+            // return calendar[i].textContent;
+        }
+    }
+
+    const checkBookings = (bookings) => {
+        budgetBookings.forEach(booking => {
+            // console.log(booking);
+            const arrival = booking['arrival_date'];
+            const departure = booking['departure_date'];
+            const room = booking['room_id'];
+            console.log(arrival, departure, room);
+
+            const arrivalDay = arrival.slice(-2);
+            const departureDay = departure.slice(-2);
+
+            console.log(arrivalDay, departureDay);
+        });
+    }
+
+    checkDays(budgetDays);
+    checkBookings(budgetBookings);
+
+    checkDays(standardDays);
+    checkBookings(standardBookings);
+
+    checkDays(luxuryDays);
+    checkBookings(luxuryBookings);
+
+    /* budgetBookings.forEach(e => {
+        else if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departure) {
+            calendar[i].style.backgroundColor = 'white';
+        }
+    }); */
+
+    /* const printBooked = (arrival, departure, calendar) => {
+        budgetDays.forEach(element => {
+            console.log(element.textContent);
+
+            if (element.textContent === '') {
+                element.style.backgroundColor = '#5a3e62';
+            } else if (element.textContent >= arrival && element.textContent <= departure) {
+                console.log(element.textContent);
+            } else {
+                element.style.backgroundColor = '#7b5c75';
+            }
+        });
+    } */
+    // printArrays(budgetBookings);
+    // printArrays(standardBookings);
+    // printArrays(luxuryBookings);
+</script>
 
 </html>

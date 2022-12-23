@@ -270,9 +270,6 @@ function showAvailability(int $room_id)
 
     $reservations =  $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    /* foreach ($reservations as $reservation) {
-        echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
-    } */
     return $reservations;
 }
 
