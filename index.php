@@ -352,62 +352,38 @@ require("./hotelFunctions.php");
     const standardDays = document.querySelectorAll('.standard td');
     const luxuryDays = document.querySelectorAll('.luxury td');
 
-    const checkDays = (calendar) => {
+    const checkDays = (calendar, arrivalDay, departureDay) => {
         for (let i = 0; i < calendar.length; i++) {
             console.log(calendar[i].textContent);
+
             if (calendar[i].textContent === '') {
                 calendar[i].style.backgroundColor = '#5a3e62';
+            } else if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departureDay) {
+                calendar[i].style.backgroundColor = "#702632";
             }
-            // return calendar[i].textContent;
         }
     }
 
-    const checkBookings = (bookings) => {
-        budgetBookings.forEach(booking => {
-            // console.log(booking);
-            const arrival = booking['arrival_date'];
-            const departure = booking['departure_date'];
-            const room = booking['room_id'];
+    const checkBookings = (bookings, calendar) => {
+        for (let i = 0; i < bookings.length; i++) {
+            const arrival = bookings[i]['arrival_date'];
+            const departure = bookings[i]['departure_date'];
+            const room = bookings[i]['room_id'];
             console.log(arrival, departure, room);
 
-            const arrivalDay = arrival.slice(-2);
-            const departureDay = departure.slice(-2);
+            const arrivalDay = parseInt(arrival.slice(-2));
+            const departureDay = parseInt(departure.slice(-2));
 
             console.log(arrivalDay, departureDay);
-        });
-    }
+            checkDays(calendar, arrivalDay, departureDay);
 
-    checkDays(budgetDays);
-    checkBookings(budgetBookings);
-
-    checkDays(standardDays);
-    checkBookings(standardBookings);
-
-    checkDays(luxuryDays);
-    checkBookings(luxuryBookings);
-
-    /* budgetBookings.forEach(e => {
-        else if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departure) {
-            calendar[i].style.backgroundColor = 'white';
         }
-    }); */
+    }
+    checkBookings(budgetBookings, budgetDays);
 
-    /* const printBooked = (arrival, departure, calendar) => {
-        budgetDays.forEach(element => {
-            console.log(element.textContent);
+    checkBookings(standardBookings, standardDays);
 
-            if (element.textContent === '') {
-                element.style.backgroundColor = '#5a3e62';
-            } else if (element.textContent >= arrival && element.textContent <= departure) {
-                console.log(element.textContent);
-            } else {
-                element.style.backgroundColor = '#7b5c75';
-            }
-        });
-    } */
-    // printArrays(budgetBookings);
-    // printArrays(standardBookings);
-    // printArrays(luxuryBookings);
+    checkBookings(luxuryBookings, luxuryDays);
 </script>
 
 </html>
