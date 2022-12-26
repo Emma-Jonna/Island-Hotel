@@ -18,10 +18,6 @@ img {
   border-collapse: 0;
 }
 
-.budget td {
-  /* background-color: aqua; */
-}
-
 td {
   border: 1px solid black;
   width: 50px;

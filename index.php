@@ -21,9 +21,17 @@ require("./hotelFunctions.php");
     <?php $budget = showAvailability(1);
     $standard = showAvailability(2);
     $luxury = showAvailability(3);
-    foreach ($budget as $reservation) {
-        echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
+
+    function printReservations($roomNr)
+    {
+        foreach ($roomNr as $reservation) {
+            echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
+        }
     }
+
+    printReservations($budget);
+    printReservations($standard);
+    printReservations($luxury);
     ?>
     <div class="font-tests">
         <h1>UnifrakturCook</h1>
@@ -351,6 +359,15 @@ require("./hotelFunctions.php");
     const budgetDays = document.querySelectorAll('.budget td');
     const standardDays = document.querySelectorAll('.standard td');
     const luxuryDays = document.querySelectorAll('.luxury td');
+
+    const colorCalendar = (calendar) => {
+        for (let i = 0; i < calendar.length; i++) {
+            // console.log(calendar[i].textContent);
+            if (calendar[i].textContent === '') {
+                calendar[i].style.backgroundColor = '#5a3e62';
+            }
+        }
+    };
 
     colorCalendar(budgetDays);
     colorCalendar(standardDays);
