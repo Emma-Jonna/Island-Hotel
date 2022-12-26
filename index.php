@@ -352,13 +352,17 @@ require("./hotelFunctions.php");
     const standardDays = document.querySelectorAll('.standard td');
     const luxuryDays = document.querySelectorAll('.luxury td');
 
+    colorCalendar(budgetDays);
+    colorCalendar(standardDays);
+    colorCalendar(luxuryDays);
+
     const checkDays = (calendar, arrivalDay, departureDay) => {
         for (let i = 0; i < calendar.length; i++) {
-            console.log(calendar[i].textContent);
-
+            // console.log(calendar[i].textContent);
             if (calendar[i].textContent === '') {
                 calendar[i].style.backgroundColor = '#5a3e62';
-            } else if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departureDay) {
+            }
+            if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departureDay) {
                 calendar[i].style.backgroundColor = "#702632";
             }
         }
@@ -369,12 +373,12 @@ require("./hotelFunctions.php");
             const arrival = bookings[i]['arrival_date'];
             const departure = bookings[i]['departure_date'];
             const room = bookings[i]['room_id'];
-            console.log(arrival, departure, room);
+            // console.log(arrival, departure, room);
 
             const arrivalDay = parseInt(arrival.slice(-2));
             const departureDay = parseInt(departure.slice(-2));
 
-            console.log(arrivalDay, departureDay);
+            // console.log(arrivalDay, departureDay);
             checkDays(calendar, arrivalDay, departureDay);
 
         }
