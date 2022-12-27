@@ -379,7 +379,7 @@ require("./hotelFunctions.php");
             if (calendar[i].textContent === '') {
                 calendar[i].style.backgroundColor = '#5a3e62';
             }
-            if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departureDay) {
+            if (calendar[i].textContent >= arrivalDay && calendar[i].textContent < departureDay) {
                 calendar[i].style.backgroundColor = "#702632";
             }
         }

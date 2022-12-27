@@ -166,6 +166,9 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
         departure_date > ?)"
     );
 
+    /* "( (arrival_date<= "2023-01-07" and departure_date >="2023-01-07") or 
+    (arrival_date<= "2023-01-08" and departure_date >="2023-01-08"))"; */
+
     $statement->bindParam(1, $roomNumber, PDO::PARAM_INT);
     $statement->bindParam(2, $arrivalDate, PDO::PARAM_STR);
     $statement->bindParam(3, $departureDate, PDO::PARAM_STR);
