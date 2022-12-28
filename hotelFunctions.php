@@ -31,29 +31,6 @@ function connect(string $dbName): object
     return $db;
 }
 
-/* function calculateTotal($inserted_id)
-{
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
-
-    $statement = $db->prepare(
-        "SELECT SUM(pricelist.price) as total_cost
-        FROM reservation_features
-        INNER JOIN user_data
-        on reservation_features.reservation_id = user_data.reservation_id
-        INNER JOIN pricelist
-        on type_id = pricelist.id
-        WHERE user_data.reservation_id = 43;"
-    );
-
-    // $statement1->bindParam(1, $reservation_id, PDO::PARAM_STR);
-
-    $totalCost = $statement->execute();
-
-    return $totalCost;
-} */
-
 function noEmptyFields()
 {
     require("./index.php");
@@ -151,9 +128,7 @@ function noEmptyFields()
 
 function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber)
 {
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
+    $db = connect('database.db');
 
     $statement = $db->prepare(
         "SELECT * 
@@ -185,10 +160,7 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
 
 function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
 {
-
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
+    $db = connect('database.db');
 
     for ($i = 0; $i < $numberOfFeatures; $i++) {
         $statement = $db->prepare(
@@ -205,9 +177,7 @@ function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFea
 
 function createReservation(string $arrivalDate, string $departureDate, int $roomNumber)
 {
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
+    $db = connect('database.db');
 
     $statement1 = $db->prepare(
         "INSERT INTO reservations (arrival_date, departure_date, room_id, info_id)
@@ -235,11 +205,30 @@ function createReservation(string $arrivalDate, string $departureDate, int $room
     return $inserted_id;
 }
 
+function calculateCost($inserted_id)
+{
+    $db = connect('database.db');
+
+    $statement = $db->prepare(
+        "SELECT SUM(pricelist.price) as total_cost
+        FROM reservation_features
+        INNER JOIN user_data
+        on reservation_features.reservation_id = user_data.reservation_id
+        INNER JOIN pricelist
+        on type_id = pricelist.id
+        WHERE user_data.reservation_id = ?;"
+    );
+
+    $statement->bindParam(1, $inserted_id, PDO::PARAM_STR);
+
+    $totalCost = $statement->execute();
+
+    return $totalCost;
+}
+
 function calcTotalCost(int $inserted_id, string $name, string $transfercode, float $totalCost)
 {
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
+    $db = connect('database.db');
 
     $statement = $db->prepare(
         "INSERT INTO user_data (name, total_cost, reservation_id, transfercode)
@@ -256,9 +245,7 @@ function calcTotalCost(int $inserted_id, string $name, string $transfercode, flo
 
 function showAvailability(int $room_id)
 {
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
+    $db = connect('database.db');
 
     $statement = $db->prepare(
         "SELECT distinct *
@@ -278,9 +265,7 @@ function showAvailability(int $room_id)
 
 function receipt($reservationId)
 {
-    $dbName = 'database.db';
-
-    $db = connect($dbName);
+    $db = connect('database.db');
 
     $statement = $db->prepare(
         "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST(rtrim(JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1, '.0') AS int) AS days_booked, info.additional_info

@@ -400,10 +400,9 @@ require("./hotelFunctions.php");
 
         }
     }
+
     checkBookings(budgetBookings, budgetDays);
-
     checkBookings(standardBookings, standardDays);
-
     checkBookings(luxuryBookings, luxuryDays);
 </script>
 

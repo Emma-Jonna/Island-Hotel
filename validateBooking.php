@@ -6,27 +6,37 @@ require("./hotelFunctions.php");
 // checks if room is set
 if (isset($_GET['room'])) {
     $erros = [];
+
+    $arrivalDate = $_GET['arrival'];
+    $departureDate = $_GET['departure'];
+    $name = $_GET['name'];
+    $transfercode = $_GET['transfercode'];
+
     // checks if the arrival and departutre date is choosen
-    if ($_GET['arrival'] === "" || $_GET['departure'] === "" || $_GET['name'] === "" || $_GET['transfercode'] === "") {
-        if ($_GET['arrival'] === "") {
+    if ($arrivalDate === "" || $departureDate === "" || $name === "" || $transfercode === "") {
+        if ($arrivalDate === "") {
             // echo "please choose arrival date" . "<br>";
             $erros[] = "please choose arrival date";
         }
-        if ($_GET['departure'] === "") {
+        if ($departureDate === "") {
             // echo "please choose departure date" . "<br>";
             $erros[] = "please choose departure date";
         }
-        if ($_GET['name'] === "") {
+        if ($name === "") {
             // echo "please enter your name" . "<br>";
             $erros[] = "please enter your name";
         }
-        if ($_GET['transfercode'] === "") {
+        if ($transfercode === "") {
             // echo "please enter a transfercode" . "<br>";
             $erros[] = "please enter a transfercode";
         }
-        if ($_GET['arrival'] > $_GET['departure']) {
+        if ($arrivalDate > $departureDate) {
             // echo "you can't leave before you arrive";
             $erros[] = "you can't leave before you arrive";
+        }
+        if ($arrivalDate === $departureDate) {
+            // echo "you can't leave same day as you arrive";
+            $erros[] = "you can't leave same day as you arrive";
         }
 
         foreach ($erros as $error) {
@@ -34,31 +44,17 @@ if (isset($_GET['room'])) {
         }
     } else {
         // checks wich room that is choosen
+
         if ($_GET['room'] === "budget") {
-            $arrivalDate = $_GET['arrival'];
-            $departureDate = $_GET['departure'];
             $roomNumber = 1;
-            $name = $_GET['name'];
-            $transfercode = $_GET['transfercode'];
             $roomPrice = 1;
         } elseif ($_GET['room'] === "standard") {
-            $arrivalDate = $_GET['arrival'];
-            $departureDate = $_GET['departure'];
             $roomNumber = 2;
-            $name = $_GET['name'];
-            $transfercode = $_GET['transfercode'];
             $roomPrice = 2;
         } elseif ($_GET['room'] === "luxury") {
-            $arrivalDate = $_GET['arrival'];
-            $departureDate = $_GET['departure'];
             $roomNumber = 3;
-            $name = $_GET['name'];
-            $transfercode = $_GET['transfercode'];
             $roomPrice = 4;
         }
-
-        $arrivalDate = $_GET['arrival'];
-        $departureDate = $_GET['departure'];
 
         $arrival = explode("-", $arrivalDate);
         $departure = explode("-", $departureDate);
