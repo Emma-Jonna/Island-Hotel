@@ -137,7 +137,7 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
         (arrival_date <= ? 
         or arrival_date < ?)
         AND 
-        (departure_date > ? or
+        (departure_date >= ? or
         departure_date > ?)"
     );
 

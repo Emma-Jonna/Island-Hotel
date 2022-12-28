@@ -314,7 +314,7 @@ require("./hotelFunctions.php");
                 <option value="luxury" id="3">Luxury</option>
             </select>
 
-            <div class="features">
+            <!-- <div class="features">
                 <input type="checkbox" name="features[]" value="4" id="breakfast">
                 <label for="features">Breakfast Buffet</label>
                 <p>2$</p>
@@ -326,7 +326,7 @@ require("./hotelFunctions.php");
                 <input type="checkbox" name="features[]" value="6" id="snacks">
                 <label for="features">Snacks Cabinet</label>
                 <p>3$</p>
-            </div>
+            </div> -->
 
             <label for="arrival">Arrival</label>
             <input type="date" name="arrival" min="2023-01-01" max="2023-01-31" id="arrival">
@@ -354,7 +354,6 @@ require("./hotelFunctions.php");
     const budgetBookings = <?php echo json_encode($budget) ?>;
     const standardBookings = <?php echo json_encode($standard); ?>;
     const luxuryBookings = <?php echo json_encode($luxury); ?>;
-    // console.log(budgetBookings, standardBookings, luxuryBookings);
 
     const budgetDays = document.querySelectorAll('.budget td');
     const standardDays = document.querySelectorAll('.standard td');
@@ -362,7 +361,6 @@ require("./hotelFunctions.php");
 
     const colorCalendar = (calendar) => {
         for (let i = 0; i < calendar.length; i++) {
-            // console.log(calendar[i].textContent);
             if (calendar[i].textContent === '') {
                 calendar[i].style.backgroundColor = '#5a3e62';
             }
@@ -379,7 +377,7 @@ require("./hotelFunctions.php");
             if (calendar[i].textContent === '') {
                 calendar[i].style.backgroundColor = '#5a3e62';
             }
-            if (calendar[i].textContent >= arrivalDay && calendar[i].textContent < departureDay) {
+            if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departureDay) {
                 calendar[i].style.backgroundColor = "#702632";
             }
         }
@@ -390,12 +388,10 @@ require("./hotelFunctions.php");
             const arrival = bookings[i]['arrival_date'];
             const departure = bookings[i]['departure_date'];
             const room = bookings[i]['room_id'];
-            // console.log(arrival, departure, room);
 
             const arrivalDay = parseInt(arrival.slice(-2));
             const departureDay = parseInt(departure.slice(-2));
 
-            // console.log(arrivalDay, departureDay);
             checkDays(calendar, arrivalDay, departureDay);
 
         }
