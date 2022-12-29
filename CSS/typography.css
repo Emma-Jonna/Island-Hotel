@@ -49,3 +49,36 @@ h1 {
 .twelve {
   font-family: 'Vollkorn-Black-Italic';
 }
+
+th {
+  font-family: 'Vollkorn-Bold';
+  font-size: 1.3rem;
+}
+
+td {
+  font-family: 'Vollkorn-SemiBold';
+  font-size: 1.3rem;
+}
+
+.date {
+  font-family: 'Vollkorn-Bold';
+  font-size: 1rem;
+}
+
+nav {
+  font-family: 'UnifrakturCook';
+  font-size: 3rem;
+}
+
+label {
+  font-family: 'Vollkorn-Medium';
+  font-size: 1.2rem;
+}
+
+.name,
+.transfer-code,
+.choose-room,
+.submit-button {
+  font-family: 'Vollkorn-Medium';
+  font-size: 1rem;
+}

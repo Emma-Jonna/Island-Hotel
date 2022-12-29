@@ -13,18 +13,20 @@
 </head>
 
 <body>
-    <?php
+    <div class="error-container">
+        <?php
 
-    foreach ($errors as $error) {
-    ?>
+        foreach ($errors as $error) {
+        ?>
 
-        <div class="errors">
-            <p><?php echo $error; ?></p>
-        </div>
-    <?php
-    }
+            <div class="errors">
+                <p><?php echo $error; ?></p>
+            </div>
+        <?php
+        }
 
-    ?>
+        ?>
+    </div>
     <a href="index.php">back to start</a>
     <?php
     ?>

@@ -1,3 +1,8 @@
+body {
+  background-color: var(--color-raisin-black);
+  color: var(--color-white);
+}
+
 img {
   width: 100%;
 }
@@ -6,34 +11,99 @@ img {
   width: 70%;
 }
 
+.calendar {
+  width: 350px;
+  flex-grow: 1;
+}
+
 .budget,
 .standard,
 .luxury {
   width: 50%;
+  display: flex;
+}
+
+table {
+  text-align: center;
 }
 
 .calendar table tbody {
-  background-color: var(--color-light-purple);
+  background-color: var(--mountbatten-pink);
   border-spacing: 0;
   border-collapse: 0;
 }
 
-td {
+td,
+th {
   border: 1px solid black;
   width: 50px;
   height: 50px;
 }
 
-.errors {
-  background-color: aqua;
+th {
+  background-color: var(--copper-penny);
 }
 
-.weekdays {
-  background-color: var(--color-white);
+.errors {
+  background-color: rgb(130, 21, 21);
+  color: white;
+  height: 60px;
+  width: 500px;
+  border-radius: 16px;
+  text-align: center;
 }
 
 footer {
   width: 100%;
   height: 100px;
-  background-color: var(--color-light-purple);
+  background-color: var(--old-burgundy);
+}
+
+nav {
+  width: 100%;
+  height: 70px;
+  background-color: var(--old-burgundy);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date {
+  height: 30px;
+  width: 130px;
+  padding: 0 10px 0 10px;
+  border-radius: 10px;
+}
+
+.name,
+.transfer-code {
+  height: 25px;
+  width: 150px;
+  border-radius: 10px;
+}
+
+.submit-button {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.choose-room {
+  height: 30px;
+  border-radius: 10px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  gap: 150px;
+}
+
+ul:hover,
+.submit-button:hover,
+.choose-room:hover {
+  cursor: pointer;
 }
