@@ -135,14 +135,20 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
         FROM reservations
         WHERE room_id = ? AND 
         (arrival_date <= ? 
-        or arrival_date < ?)
+        or arrival_date <= ?)
         AND 
         (departure_date >= ? or
-        departure_date > ?)"
+        departure_date >= ?)"
     );
 
     /* "( (arrival_date<= "2023-01-07" and departure_date >="2023-01-07") or 
     (arrival_date<= "2023-01-08" and departure_date >="2023-01-08"))"; */
+
+    /* (arrival_date <= '2023-01-05' 
+        or arrival_date < '2023-01-11' )
+        AND 
+        (departure_date > '2023-01-05' or
+        departure_date >'2023-01-11') */
 
     $statement->bindParam(1, $roomNumber, PDO::PARAM_INT);
     $statement->bindParam(2, $arrivalDate, PDO::PARAM_STR);
@@ -287,6 +293,13 @@ function receipt($reservationId)
 
     return $receipt;
 };
+
+function printReservations($roomNr)
+{
+    foreach ($roomNr as $reservation) {
+        echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
+    }
+}
 
 
 function guidv4(string $data = null): string

@@ -22,13 +22,6 @@ require("./hotelFunctions.php");
     $standard = showAvailability(2);
     $luxury = showAvailability(3);
 
-    function printReservations($roomNr)
-    {
-        foreach ($roomNr as $reservation) {
-            echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
-        }
-    }
-
     printReservations($budget);
     printReservations($standard);
     printReservations($luxury);

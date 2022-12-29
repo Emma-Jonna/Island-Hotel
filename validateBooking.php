@@ -8,8 +8,8 @@ $errors = [];
 
 $arrivalDate = $_GET['arrival'];
 $departureDate = $_GET['departure'];
-$name = $_GET['name'];
-$transfercode = $_GET['transfercode'];
+$name = htmlspecialchars($_GET['name'], ENT_QUOTES);
+$transfercode = htmlspecialchars($_GET['transfercode'], ENT_QUOTES);
 
 // checks if the arrival and departutre date is choosen
 if ($arrivalDate === "") {
@@ -27,9 +27,9 @@ if ($transfercode === "") {
 if ($arrivalDate > $departureDate) {
     $errors[] = "you can't leave before you arrive";
 }
-if ($arrivalDate === $departureDate) {
+/* if ($arrivalDate === $departureDate) {
     $errors[] = "you can't leave same day as you arrive";
-}
+} */
 if (!count($errors) === 0) {
     foreach ($errors as $error) {
         echo $error . "<br>";
@@ -61,8 +61,6 @@ if (!count($errors) === 0) {
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
 
-    // print_r(count($status));
-
     if (count($bookings) === 0) {
 
         $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
@@ -74,8 +72,6 @@ if (!count($errors) === 0) {
             insertFeatures($insertId, $_GET['features'], count($_GET['features']));
         }
 
-
-        // print_r(receipt());
         header('Content-Type: application/json');
         echo (json_encode(receipt($insertId)));
     } else {
