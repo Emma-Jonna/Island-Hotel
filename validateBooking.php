@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 require("./hotelFunctions.php");
 // require("./errors.php");
 
@@ -27,13 +26,9 @@ if ($transfercode === "") {
 if ($arrivalDate > $departureDate) {
     $errors[] = "you can't leave before you arrive";
 }
-/* if ($arrivalDate === $departureDate) {
-    $errors[] = "you can't leave same day as you arrive";
-} */
-if (!count($errors) === 0) {
-    foreach ($errors as $error) {
-        echo $error . "<br>";
-    }
+
+if (!(count($errors) === 0)) {
+    require("errors.php");
 } else {
     // checks wich room that is choosen
     if ($_GET['room'] === "budget") {
@@ -47,16 +42,26 @@ if (!count($errors) === 0) {
         $roomPrice = 4;
     }
 
+
     $arrival = explode("-", $arrivalDate);
     $departure = explode("-", $departureDate);
 
     $days = ($departure[2] - $arrival[2]) + 1;
 
-    if ($days > 2) {
-        $dayHalfPrice = $roomPrice / 2;
-        $totalCost = ($roomPrice * $days) - $dayHalfPrice;
+    if ($days >= 5) {
+        $totalCost = ($roomPrice * $days) - $roomPrice;
     } else {
         $totalCost = $roomPrice * $days;
+    }
+
+    if (isset($_GET['features'])) {
+        $features = $_GET['features'];
+        $featureCost = 0;
+        foreach ($features as $feature) {
+            $featureCost = $featureCost + $feature;
+        }
+
+        $totalCost = $totalCost + $featureCost;
     }
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
