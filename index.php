@@ -308,9 +308,9 @@ require("./hotelFunctions.php");
 
             <label for="room">Room</label>
             <select name="room" class="choose-room">
-                <option value="budget" id="1">Budget</option>
-                <option value="standard" id="2">Standard</option>
-                <option value="luxury" id="3">Luxury</option>
+                <option value="budget">Budget</option>
+                <option value="standard">Standard</option>
+                <option value="luxury">Luxury</option>
             </select>
 
             <!-- <div class="features">

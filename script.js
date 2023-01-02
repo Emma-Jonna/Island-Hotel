@@ -1,9 +1,9 @@
-const body = document.querySelector('body');
+/* const body = document.querySelector('body');
 const tableHead = document.querySelectorAll('thead');
 const tableBody = document.querySelectorAll('tbody');
 const tableRow = document.querySelectorAll('tr');
 const tableHeader = document.querySelectorAll('th');
-const days = document.querySelectorAll('td');
+const days = document.querySelectorAll('td'); */
 const arrival = document.getElementById('arrival');
 const departure = document.getElementById('departure');
 const totalCostContainer = document.querySelector('.total-cost');
@@ -15,13 +15,12 @@ const budget = 1;
 const standard = 2;
 const luxury = 4;
 
-console.log(room.value);
-
 let roomName = room.value;
+console.log(roomName);
 
 room.addEventListener('change', () => {
-  console.log(room.value);
   roomName = room.value;
+  console.log(roomName);
   if (arrival.value != '' && departure.value != '') {
     calculateDays(roomName);
   }
@@ -39,10 +38,7 @@ departure.addEventListener('change', () => {
   }
 });
 
-console.log(roomName);
-
 const calculateDays = (room) => {
-  console.log('Hello');
   const arrivalDay = parseInt(arrival.value.slice(-2));
   const departureDay = parseInt(departure.value.slice(-2));
 
