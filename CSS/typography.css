@@ -70,7 +70,11 @@ nav {
   font-size: 3rem;
 }
 
-label {
+label,
+h2,
+h3,
+.total-cost p,
+.description p {
   font-family: 'Vollkorn-Medium';
   font-size: 1.2rem;
 }

@@ -7,10 +7,6 @@ img {
   width: 100%;
 }
 
-.room img {
-  width: 70%;
-}
-
 .calendar {
   width: 350px;
   flex-grow: 1;
@@ -19,7 +15,7 @@ img {
 .budget,
 .standard,
 .luxury {
-  width: 50%;
+  width: 60%;
   display: flex;
 }
 
@@ -106,4 +102,8 @@ ul:hover,
 .submit-button:hover,
 .choose-room:hover {
   cursor: pointer;
+}
+
+.total-cost {
+  display: flex;
 }

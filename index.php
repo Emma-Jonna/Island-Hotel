@@ -333,6 +333,11 @@ require("./hotelFunctions.php");
             <label for="departure">Departure</label>
             <input class="date" type="date" name="departure" min="2023-01-01" max="2023-01-31" id="departure">
 
+            <div class="total-cost">
+                <h3>Total cost: </h3>
+                <p>0</p>
+            </div>
+
             <label for="transfercode">Transfercode</label>
             <input class="transfer-code" type="text" name="transfercode">
 
