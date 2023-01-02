@@ -78,6 +78,7 @@ if (!(count($errors) === 0)) {
         }
 
         header('Content-Type: application/json');
+
         echo (json_encode(receipt($insertId)));
     } else {
         echo "The room is already booked";

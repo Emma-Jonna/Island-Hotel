@@ -274,7 +274,7 @@ function receipt($reservationId)
     $db = connect('database.db');
 
     $statement = $db->prepare(
-        "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST(rtrim(JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1, '.0') AS int) AS days_booked, info.additional_info
+        "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST((JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1) AS int) AS days_booked, info.additional_info
         FROM reservations
         INNER JOIN user_data
         on reservations.id = user_data.reservation_id

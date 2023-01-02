@@ -310,10 +310,10 @@ require("./hotelFunctions.php");
             <select name="room" class="choose-room">
                 <option value="budget" id="1">Budget</option>
                 <option value="standard" id="2">Standard</option>
-                <option value="luxury" id="4">Luxury</option>
+                <option value="luxury" id="3">Luxury</option>
             </select>
 
-            <div class="features">
+            <!-- <div class="features">
                 <input type="checkbox" name="features[]" value="4" id="breakfast">
                 <label for="features">Breakfast Buffet</label>
                 <p>2$</p>
@@ -325,7 +325,7 @@ require("./hotelFunctions.php");
                 <input type="checkbox" name="features[]" value="6" id="snacks">
                 <label for="features">Snacks Cabinet</label>
                 <p>3$</p>
-            </div>
+            </div> -->
 
             <label for="arrival">Arrival</label>
             <input class="date" type="date" name="arrival" min="2023-01-01" max="2023-01-31" id="arrival">
