@@ -46,7 +46,7 @@ const calculateDays = (room) => {
   const arrivalDay = parseInt(arrival.value.slice(-2));
   const departureDay = parseInt(departure.value.slice(-2));
 
-  const totalDays = departureDay - arrivalDay;
+  const totalDays = departureDay - arrivalDay + 1;
   let costPerDay = 0;
   let totalCost = 0;
 
