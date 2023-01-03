@@ -334,7 +334,7 @@ require("./hotelFunctions.php");
 
             <div class="total-cost">
                 <h3>Total cost: </h3>
-                <p>0</p>
+                <p>0 $</p>
             </div>
 
             <label for="transfercode">Transfercode</label>

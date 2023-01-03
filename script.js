@@ -10,13 +10,38 @@ const totalCostContainer = document.querySelector('.total-cost');
 const h3 = document.querySelector('h3');
 const total = document.querySelector('.total-cost p');
 const room = document.querySelector('.choose-room');
+const features = document.querySelectorAll('.features input');
 
 const budget = 1;
 const standard = 2;
 const luxury = 4;
 
+const breakfast = 2;
+const tour = 1;
+const snacks = 3;
+
 let roomName = room.value;
-console.log(roomName);
+// console.log(roomName);
+
+let featureCost = 0;
+
+features.forEach((feature) => {
+  feature.addEventListener('change', () => {
+    console.log(feature.checked);
+    console.log(feature.value);
+
+    if (feature.value === 4) {
+      featureCost = featureCost + breakfast;
+    }
+    if (feature.value === 5) {
+      featureCost = featureCost + tour;
+    }
+    if (feature.value === 6) {
+      featureCost = featureCost + snacks;
+    }
+    console.log(featureCost);
+  });
+});
 
 room.addEventListener('change', () => {
   roomName = room.value;
