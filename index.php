@@ -63,7 +63,7 @@ require("./hotelFunctions.php");
                     <div class="calendar">
                         <h2>January 2023</h2>
                         <table cellspacing="0">
-                            <thead>
+                            <tbody>
                                 <tr class="weekdays">
                                     <th>M</th>
                                     <th>T</th>
@@ -73,8 +73,6 @@ require("./hotelFunctions.php");
                                     <th>S</th>
                                     <th>S</th>
                                 </tr>
-                            </thead>
-                            <tbody>
                                 <tr>
                                     <td></td>
                                     <td></td>
