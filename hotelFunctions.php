@@ -31,6 +31,27 @@ function connect(string $dbName): object
     return $db;
 }
 
+function checkPrice($priceId): int
+{
+    $db = connect('database.db');
+
+    $statement = $db->prepare(
+        "SELECT *
+        FROM pricelist
+        WHERE id = ?"
+    );
+
+    $statement->bindParam(1, $priceId, PDO::PARAM_INT);
+
+    $statement->execute();
+
+    $priceList =  $statement->fetch(PDO::FETCH_ASSOC);
+
+    // echo "feature price:" . $priceList['price'];
+
+    return $priceList['price'];
+}
+
 function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber)
 {
     $db = connect('database.db');
@@ -69,7 +90,7 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
     return $reservations;
 }
 
-/* function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
+function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
 {
     $db = connect('database.db');
 
@@ -84,7 +105,7 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
 
         $statement->execute();
     }
-} */
+}
 
 function createReservation(string $arrivalDate, string $departureDate, int $roomNumber)
 {

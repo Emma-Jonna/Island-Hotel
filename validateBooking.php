@@ -34,69 +34,71 @@ if (!(count($errors) === 0)) {
     require("errors.php");
 } else {
     // checks wich room that is choosen
-    if ($_POST['room'] === "budget") {
-        $roomNumber = 1;
-        $roomPrice = 1;
-    } elseif ($_POST['room'] === "standard") {
-        $roomNumber = 2;
-        $roomPrice = 2;
-    } elseif ($_POST['room'] === "luxury") {
-        $roomNumber = 3;
-        $roomPrice = 4;
-    }
-
+    $roomNumber = $_POST['room'];
+    $roomPrice = checkPrice($_POST['room']);
 
     $arrival = explode("-", $arrivalDate);
     $departure = explode("-", $departureDate);
 
     $days = ($departure[2] - $arrival[2]) + 1;
+    $totalCost = 0;
+    // echo "init" . var_dump($totalCost) . "<br>";
 
     if ($days >= 5) {
         $totalCost = ($roomPrice * $days) - $roomPrice;
+        // echo "more than 5 days" . var_dump($totalCost) . "<br>";
     } else {
         $totalCost = $roomPrice * $days;
+        // var_dump($totalCost) . "<br>";
     }
 
-    /* if (isset($_POST['features'])) {
+    if (isset($_POST['features'])) {
         $features = $_POST['features'];
-        $featureCost = 0;
+
         foreach ($features as $feature) {
-            $featureCost = $featureCost + $feature;
+            // var_dump($feature);
+            // echo "feature1" .  var_dump($totalCost) . "<br>";
+            $featureCost = checkPrice($feature);
+            // echo "featureCost " . $featureCost . "feature id " . $feature . "total cost " . $totalCost . "<br>";
+            // echo "feature price:" . $featureTotal;
+            $totalCost = $totalCost + $featureCost;
+            // echo "feature2" .  var_dump($totalCost) . "<br>";
         }
 
-        $totalCost = $totalCost + $featureCost;
-    } */
+
+        // echo "total with features" . var_dump($totalCost) . "<br>";
+        // var_dump($totalCost);
+    }
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
 
-    $client = new Client();
+    // $client = new Client();
 
     /* When working with data from other sources, it can be convenient to put your code in a try/catch-block, because if something bad happens, it can be caught in the catch-section and handled there. */
-    try {
+    /* try {
         $response = $client->request(
             'POST',
             'https://www.yrgopelago.se/centralbank/transferCode',
             [
                 'query' => [
                     'transferCode' => '',
-                    'totalcost' => ''
+                    'totalcost' => 'bar'
                 ]
-                // {'transferCode': 'the-transfercode', 'totalcost': 10}
             ]
         );
     } catch (ClientException $e) {
         echo $e->getMessage();
     }
-
+ */
     /* If we got some response, we will create a variable and put all the decoded content in there. */
-    if ($response->getBody()) {
-        /* $horses = json_decode($response->getBody()->getContents());
+    // if ($response->getBody()) {
+    /* $horses = json_decode($response->getBody()->getContents());
 
         // Then we can use the data in what way we want.
         foreach ($horses->horses as $horse) {
             echo $horse->name . "<p>";
         } */
-    }
+    // }
 
     if (count($bookings) === 0) {
 
@@ -105,9 +107,9 @@ if (!(count($errors) === 0)) {
         calcTotalCost($insertId, $name, $transfercode, $totalCost);
 
         // checks wich features are choosen
-        /* if (isset($_GET['features'])) {
-            insertFeatures($insertId, $_GET['features'], count($_GET['features']));
-        } */
+        if (isset($_POST['features'])) {
+            insertFeatures($insertId, $_POST['features'], count($_POST['features']));
+        }
 
         header('Content-Type: application/json');
 

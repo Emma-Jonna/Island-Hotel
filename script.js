@@ -46,11 +46,11 @@ const calculateDays = (room) => {
   let costPerDay = 0;
   let totalCost = 0;
 
-  if (room === 'budget') {
+  if (room === '1') {
     costPerDay = budget;
-  } else if (room === 'standard') {
+  } else if (room === '2') {
     costPerDay = standard;
-  } else if (room === 'luxury') {
+  } else if (room === '3') {
     costPerDay = luxury;
   }
 
