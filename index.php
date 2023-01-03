@@ -1,5 +1,6 @@
 <?php
 require("./hotelFunctions.php");
+// require 'vendor/autoload.php';
 
 ?>
 

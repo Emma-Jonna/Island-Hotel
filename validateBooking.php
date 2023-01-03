@@ -1,7 +1,10 @@
 <?php
 
 require("./hotelFunctions.php");
-// require("./errors.php");
+require "./vendor/autoload.php";
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 $errors = [];
 
@@ -65,6 +68,35 @@ if (!(count($errors) === 0)) {
     } */
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
+
+    $client = new Client();
+
+    /* When working with data from other sources, it can be convenient to put your code in a try/catch-block, because if something bad happens, it can be caught in the catch-section and handled there. */
+    try {
+        $response = $client->request(
+            'POST',
+            'https://www.yrgopelago.se/centralbank/transferCode',
+            [
+                'query' => [
+                    'transferCode' => '',
+                    'totalcost' => ''
+                ]
+                // {'transferCode': 'the-transfercode', 'totalcost': 10}
+            ]
+        );
+    } catch (ClientException $e) {
+        echo $e->getMessage();
+    }
+
+    /* If we got some response, we will create a variable and put all the decoded content in there. */
+    if ($response->getBody()) {
+        /* $horses = json_decode($response->getBody()->getContents());
+
+        // Then we can use the data in what way we want.
+        foreach ($horses->horses as $horse) {
+            echo $horse->name . "<p>";
+        } */
+    }
 
     if (count($bookings) === 0) {
 
