@@ -5,10 +5,10 @@ require("./hotelFunctions.php");
 
 $errors = [];
 
-$arrivalDate = $_GET['arrival'];
-$departureDate = $_GET['departure'];
-$name = htmlspecialchars($_GET['name'], ENT_QUOTES);
-$transfercode = htmlspecialchars($_GET['transfercode'], ENT_QUOTES);
+$arrivalDate = $_POST['arrival'];
+$departureDate = $_POST['departure'];
+$name = htmlspecialchars($_POST['name'], ENT_QUOTES);
+$transfercode = htmlspecialchars($_POST['transfercode'], ENT_QUOTES);
 
 // checks if the arrival and departutre date is choosen
 if ($arrivalDate === "") {
@@ -31,13 +31,13 @@ if (!(count($errors) === 0)) {
     require("errors.php");
 } else {
     // checks wich room that is choosen
-    if ($_GET['room'] === "budget") {
+    if ($_POST['room'] === "budget") {
         $roomNumber = 1;
         $roomPrice = 1;
-    } elseif ($_GET['room'] === "standard") {
+    } elseif ($_POST['room'] === "standard") {
         $roomNumber = 2;
         $roomPrice = 2;
-    } elseif ($_GET['room'] === "luxury") {
+    } elseif ($_POST['room'] === "luxury") {
         $roomNumber = 3;
         $roomPrice = 4;
     }
@@ -54,15 +54,15 @@ if (!(count($errors) === 0)) {
         $totalCost = $roomPrice * $days;
     }
 
-    if (isset($_GET['features'])) {
-        $features = $_GET['features'];
+    /* if (isset($_POST['features'])) {
+        $features = $_POST['features'];
         $featureCost = 0;
         foreach ($features as $feature) {
             $featureCost = $featureCost + $feature;
         }
 
         $totalCost = $totalCost + $featureCost;
-    }
+    } */
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
 
@@ -73,9 +73,9 @@ if (!(count($errors) === 0)) {
         calcTotalCost($insertId, $name, $transfercode, $totalCost);
 
         // checks wich features are choosen
-        if (isset($_GET['features'])) {
+        /* if (isset($_GET['features'])) {
             insertFeatures($insertId, $_GET['features'], count($_GET['features']));
-        }
+        } */
 
         header('Content-Type: application/json');
 

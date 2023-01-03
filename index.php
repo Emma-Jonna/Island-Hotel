@@ -302,7 +302,7 @@ require("./hotelFunctions.php");
             </div>
         </div>
 
-        <form action="./validateBooking.php" method="GET">
+        <form action="./validateBooking.php" method="POST">
             <label for="name">Please enter your full name</label>
             <input class="name" type="text" name="name">
 
