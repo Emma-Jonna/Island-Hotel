@@ -103,24 +103,23 @@ if (!(count($errors) === 0)) {
 
     // echo count($status);
 
-    echo $status['amount'];
-    echo $totalCost;
-
     if (!(count($status) > 1)) {
         $errors[] = "the voucher has been used";
         require("errors.php");
     } else {
-        if ($status['amount'] < $totalCost) {
+        $voucher =  $status['amount'];
+
+        if ($voucher < $totalCost) {
             $errors[] = "the voucher amount is too little";
         }
-        if ($status['amount'] > $totalCost) {
+        if ($voucher > $totalCost) {
             $errors[] = "the voucher amount is too much";
         }
         if (!(count($errors) === 0)) {
             require("errors.php");
         } else {
-            echo "voucher is unused" . "<br>";
-            var_dump($status);
+            // echo "voucher is unused" . "<br>";
+            // var_dump($status);
 
             if (count($bookings) === 0) {
 
@@ -132,6 +131,26 @@ if (!(count($errors) === 0)) {
                 if (isset($_POST['features'])) {
                     insertFeatures($insertId, $_POST['features'], count($_POST['features']));
                 }
+
+
+
+
+                $client = new Client();
+                $headers = [
+                    'Content-Type' => 'application/x-www-form-urlencoded'
+                ];
+                $options = [
+                    'form_params' => [
+                        'user' => 'Johanna',
+                        'transferCode' => $transfercode
+                    ]
+                ];
+                $request = new Request('POST', 'http://yrgopelago.se/centralbank/deposit', $headers);
+                $response = $client->sendAsync($request, $options)->wait();
+                $state = json_decode($response->getBody()->getContents(), true);
+
+                // var_dump($state);
+
 
                 header('Content-Type: application/json');
 
