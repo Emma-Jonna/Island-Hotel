@@ -5,6 +5,7 @@ require "./vendor/autoload.php";
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request;
 
 $errors = [];
 
@@ -72,49 +73,75 @@ if (!(count($errors) === 0)) {
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
 
-    // $client = new Client();
+    // check if valid and unused
 
-    /* When working with data from other sources, it can be convenient to put your code in a try/catch-block, because if something bad happens, it can be caught in the catch-section and handled there. */
-    /* try {
-        $response = $client->request(
-            'POST',
-            'https://www.yrgopelago.se/centralbank/transferCode',
-            [
-                'query' => [
-                    'transferCode' => '',
-                    'totalcost' => 'bar'
-                ]
-            ]
-        );
-    } catch (ClientException $e) {
-        echo $e->getMessage();
-    }
- */
-    /* If we got some response, we will create a variable and put all the decoded content in there. */
-    // if ($response->getBody()) {
-    /* $horses = json_decode($response->getBody()->getContents());
+    // check amount
 
-        // Then we can use the data in what way we want.
-        foreach ($horses->horses as $horse) {
-            echo $horse->name . "<p>";
-        } */
-    // }
+    // check bookings
 
-    if (count($bookings) === 0) {
+    // if all clear transfer money
 
-        $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
+    // show receipt
 
-        calcTotalCost($insertId, $name, $transfercode, $totalCost);
+    $client = new Client();
+    $headers = [
+        'Content-Type' => 'application/x-www-form-urlencoded'
+    ];
+    $options = [
+        'form_params' => [
+            'transferCode' => $transfercode,
+            'totalcost' => '1'
+        ]
+    ];
+    $request = new Request('POST', 'http://yrgopelago.se/centralbank/transferCode', $headers);
+    $response = $client->sendAsync($request, $options)->wait();
+    $status = json_decode($response->getBody()->getContents(), true);
+    // header("content-type: application/json");
+    // var_dump($status);
 
-        // checks wich features are choosen
-        if (isset($_POST['features'])) {
-            insertFeatures($insertId, $_POST['features'], count($_POST['features']));
-        }
+    // echo "<br>";
 
-        header('Content-Type: application/json');
+    // echo count($status);
 
-        echo (json_encode(receipt($insertId)));
+    echo $status['amount'];
+    echo $totalCost;
+
+    if (!(count($status) > 1)) {
+        $errors[] = "the voucher has been used";
+        require("errors.php");
     } else {
-        echo "The room is already booked";
+        if ($status['amount'] < $totalCost) {
+            $errors[] = "the voucher amount is too little";
+        }
+        if ($status['amount'] > $totalCost) {
+            $errors[] = "the voucher amount is too much";
+        }
+        if (!(count($errors) === 0)) {
+            require("errors.php");
+        } else {
+            echo "voucher is unused" . "<br>";
+            var_dump($status);
+
+            if (count($bookings) === 0) {
+
+                $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
+
+                calcTotalCost($insertId, $name, $transfercode, $totalCost);
+
+                // checks wich features are choosen
+                if (isset($_POST['features'])) {
+                    insertFeatures($insertId, $_POST['features'], count($_POST['features']));
+                }
+
+                header('Content-Type: application/json');
+
+                echo (json_encode(receipt($insertId)));
+            } else {
+                // echo "The room is already booked";
+                $errors[] = "The room is already booked";
+                require("errors.php");
+            }
+            // echo "hello";
+        }
     }
 }
