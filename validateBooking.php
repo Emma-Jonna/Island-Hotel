@@ -96,15 +96,9 @@ if (!(count($errors) === 0)) {
     $request = new Request('POST', 'http://yrgopelago.se/centralbank/transferCode', $headers);
     $response = $client->sendAsync($request, $options)->wait();
     $status = json_decode($response->getBody()->getContents(), true);
-    // header("content-type: application/json");
-    // var_dump($status);
-
-    // echo "<br>";
-
-    // echo count($status);
 
     if (!(count($status) > 1)) {
-        $errors[] = "the voucher has been used";
+        $errors[] = "the voucher is not valid or have been used";
         require("errors.php");
     } else {
         $voucher =  $status['amount'];
@@ -118,8 +112,6 @@ if (!(count($errors) === 0)) {
         if (!(count($errors) === 0)) {
             require("errors.php");
         } else {
-            // echo "voucher is unused" . "<br>";
-            // var_dump($status);
 
             if (count($bookings) === 0) {
 
@@ -131,9 +123,6 @@ if (!(count($errors) === 0)) {
                 if (isset($_POST['features'])) {
                     insertFeatures($insertId, $_POST['features'], count($_POST['features']));
                 }
-
-
-
 
                 $client = new Client();
                 $headers = [
@@ -149,18 +138,13 @@ if (!(count($errors) === 0)) {
                 $response = $client->sendAsync($request, $options)->wait();
                 $state = json_decode($response->getBody()->getContents(), true);
 
-                // var_dump($state);
-
-
                 header('Content-Type: application/json');
 
                 echo (json_encode(receipt($insertId)));
             } else {
-                // echo "The room is already booked";
                 $errors[] = "The room is already booked";
                 require("errors.php");
             }
-            // echo "hello";
         }
     }
 }
