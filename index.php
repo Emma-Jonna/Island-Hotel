@@ -23,9 +23,9 @@ require("./hotelFunctions.php");
     $standard = showAvailability(2);
     $luxury = showAvailability(3);
 
-    printReservations($budget);
-    printReservations($standard);
-    printReservations($luxury);
+    // printReservations($budget);
+    // printReservations($standard);
+    // printReservations($luxury);
     ?>
     <div class="font-tests">
         <h1>UnifrakturCook</h1>

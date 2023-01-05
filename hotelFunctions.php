@@ -195,7 +195,7 @@ function showAvailability(int $room_id)
     return $reservations;
 }
 
-function receipt($reservationId)
+/* function receipt($reservationId)
 {
     $db = connect('database.db');
 
@@ -218,7 +218,7 @@ function receipt($reservationId)
     $receipt = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $receipt;
-};
+}; */
 
 // only for testing
 function printReservations($roomNr)
