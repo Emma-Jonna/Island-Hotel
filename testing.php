@@ -23,26 +23,87 @@ function receipt($reservationId)
 
     $receipt = $statement->fetch(PDO::FETCH_ASSOC);
 
-    return $receipt;
+    // return $receipt;
+
+    // header("content-type: application/json");
+
+    // $features['features'] = $feature;
+
+    // $feature = json_encode($feature, true);
+
+    // print_r($features);
+
+
+    // var_dump($feature);
+
+    // echo $feature['features'];
+
+    // echo $features;
+    $feature = featuresToReceipt($reservationId);
+
+    $info = $receipt;
+
+    // $info = json_encode($info, true);
+    $info['features'] = $feature;
+
+    // $info = array_push($info, 'features', $features['features']);
+    // $info = json_decode($info, true);
+    // var_dump($info);
+
+    // array_merge($features, $info);
+
+    // $newArray = $info + $features['features'];
+
+    // var_dump($info);
+    // print_r($info);
+
+
+    // var_dump($info);
+
+    // echo $info;
+
+
+    // var_dump($info);
+
+    $info = json_encode($info, true);
+
+    // var_dump($info);
+
+    // var_dump($info);
+
+    // array_push($info, $features);
+
+    // var_dump($info);
+
+    // $info = json_encode($info, true);
+
+    // echo $info;
+    return $info;
 };
 
-$db = connect('database.db');
+function featuresToReceipt($reservationId)
+{
+    $db = connect('database.db');
 
-$features = [];
+    $features = [];
 
-$statement = $db->prepare(
-    "SELECT pricelist.name as feature, pricelist.price
+    $statement = $db->prepare(
+        "SELECT pricelist.name as feature, pricelist.price
     FROM reservation_features
     INNER JOIN pricelist
     on pricelist.id = reservation_features.type_id
-    WHERE reservation_id = 2 and pricelist.id > 3"
-);
+    WHERE reservation_id = ? and pricelist.id > 3"
+    );
 
-// $statement->bindParam(1, $arrivalDate, PDO::PARAM_STR);
+    $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
+    // $statement->bindParam(1, $arrivalDate, PDO::PARAM_STR);
 
-$statement->execute();
+    $statement->execute();
 
-$feature = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $feature = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $feature;
+}
 
 header("content-type: application/json");
 
@@ -58,6 +119,7 @@ header("content-type: application/json");
 // echo $feature['features'];
 
 // echo $features;
+$feature = featuresToReceipt(2);
 
 $info = receipt(2);
 
