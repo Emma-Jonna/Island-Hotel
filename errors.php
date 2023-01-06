@@ -27,7 +27,9 @@
 
         ?>
     </div>
-    <a href="index.php">back to start</a>
+    <div class="link-container">
+        <a href="index.php">back to start</a>
+    </div>
     <?php
     ?>
 </body>

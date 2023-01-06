@@ -27,7 +27,7 @@ require("./hotelFunctions.php");
     // printReservations($standard);
     // printReservations($luxury);
     ?>
-    <div class="font-tests">
+    <!-- <div class="font-tests">
         <h1>UnifrakturCook</h1>
         <p class="one">Vollkorn-Regular</p>
         <p class="two">Vollkorn-Regular-Italic</p>
@@ -41,7 +41,7 @@ require("./hotelFunctions.php");
         <p class="ten">Vollkorn-ExtraBold-Italic</p>
         <p class="eleven">Vollkorn-Black</p>
         <p class="twelve">Vollkorn-Black-Italic</p>
-    </div>
+    </div> -->
 
     <header>
         <nav>
@@ -132,10 +132,15 @@ require("./hotelFunctions.php");
                     </div>
                 </div>
                 <div class="room">
-                    <h3>Budget</h3>
-                    <img src="./Images/economic.jpg" alt="">
-                    <div class="description">
-                        <p>1$</p>
+                    <div class="room-info">
+                        <h3>Budget</h3>
+                        <p class="room-price">1$</p>
+                        <div class="description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="room-picture">
+                        <img src="./Images/economic.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -212,10 +217,15 @@ require("./hotelFunctions.php");
                     </div>
                 </div>
                 <div class="room">
-                    <h3>Standard</h3>
-                    <img src="./Images/standard.jpeg" alt="">
-                    <div class="description">
-                        <p>2$</p>
+                    <div class="room-info">
+                        <h3>Standard</h3>
+                        <p class="room-price">2$</p>
+                        <div class="description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="room-picture">
+                        <img src="./Images/standard.jpeg" alt="">
                     </div>
                 </div>
             </div>
@@ -292,57 +302,83 @@ require("./hotelFunctions.php");
                     </div>
                 </div>
                 <div class="room">
-                    <h3>Luxury</h3>
-                    <img src="./Images/view.jpeg" alt="">
-                    <div class="description">
-                        <p>4$</p>
+                    <div class="room-info">
+                        <h3>Luxury</h3>
+                        <p class="room-price">4$</p>
+                        <div class="description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="room-picture">
+                        <img src="./Images/view.jpeg" alt="">
                     </div>
                 </div>
             </div>
         </div>
 
         <form action="./validateBooking.php" method="POST">
-            <label for="name">Please enter your full name</label>
-            <input class="name" type="text" name="name">
-
-            <label for="room">Room</label>
-            <select name="room" class="choose-room">
-                <option value="1" id="budget">Budget</option>
-                <option value="2" id="standard">Standard</option>
-                <option value="3" id="luxury">Luxury</option>
-            </select>
-
-            <div class="features">
-                <input type="checkbox" name="features[]" value="4" id="breakfast">
-                <label for="features">Breakfast Buffet</label>
-                <p>2$</p>
-
-                <input type="checkbox" name="features[]" value="5" id="tour">
-                <label for="features">Castle Tour</label>
-                <p>1$</p>
-
-                <input type="checkbox" name="features[]" value="6" id="snacks">
-                <label for="features">Snacks Cabinet</label>
-                <p>3$</p>
+            <div class="name-input">
+                <label for="name">Name</label>
+                <input class="name" type="text" name="name">
             </div>
 
-            <label for="arrival">Arrival</label>
-            <input class="date" type="date" name="arrival" min="2023-01-01" max="2023-01-31" id="arrival">
+            <div class="room-alternatives">
+                <label for="room">Room</label>
+                <select name="room" class="choose-room">
+                    <option value="1" id="budget">Budget</option>
+                    <option value="2" id="standard">Standard</option>
+                    <option value="3" id="luxury">Luxury</option>
+                </select>
+            </div>
 
-            <label for="departure">Departure</label>
-            <input class="date" type="date" name="departure" min="2023-01-01" max="2023-01-31" id="departure">
+            <div class="form-calendars">
+                <div class="form-calendar">
+                    <label for="arrival">Arrival</label>
+                    <input class="date" type="date" name="arrival" min="2023-01-01" max="2023-01-31" id="arrival">
+                </div>
+
+                <div class="form-calendar">
+                    <label for="departure">Departure</label>
+                    <input class="date" type="date" name="departure" min="2023-01-01" max="2023-01-31" id="departure">
+                </div>
+
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <input type="checkbox" name="features[]" value="4" id="breakfast">
+                    <label for="features">Breakfast Buffet: </label>
+                    <p>2$</p>
+                </div>
+                <div class="feature">
+                    <input type="checkbox" name="features[]" value="5" id="tour">
+                    <label for="features">Castle Tour: </label>
+                    <p>1$</p>
+                </div>
+                <div class="feature">
+                    <input type="checkbox" name="features[]" value="6" id="snacks">
+                    <label for="features">Snacks Cabinet: </label>
+                    <p>3$</p>
+                </div>
+            </div>
+
 
             <div class="total-cost">
                 <h3>Total cost: </h3>
                 <p>0 $</p>
             </div>
 
-            <label for="transfercode">Transfercode</label>
-            <input class="transfer-code" type="text" name="transfercode">
+            <div class="form-transfercode">
+                <label for="transfercode">Transfercode</label>
+                <input class="transfer-code" type="text" name="transfercode">
+            </div>
 
-            <button class="submit-button" type="submit" name="submit">
-                Make reservation
-            </button>
+            <div class="from-button">
+                <button class="submit-button" type="submit" name="submit">
+                    Make reservation
+                </button>
+            </div>
+
         </form>
 
     </main>
