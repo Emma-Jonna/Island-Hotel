@@ -44,32 +44,32 @@ features.forEach((feature) => {
     let isChecked = feature.checked;
     let featureId = parseInt(feature.value);
 
-    console.log(isChecked, featureId);
+    // console.log(isChecked, featureId);
 
     if (featureId === 4) {
       if (isChecked === true) {
-        console.log('breakfast');
+        // console.log('breakfast');
         featureCost = featureCost + breakfast;
       } else {
-        console.log('no breakfast');
+        // console.log('no breakfast');
         featureCost = featureCost - breakfast;
       }
     }
     if (featureId === 5) {
       if (isChecked === true) {
-        console.log('tour');
+        // console.log('tour');
         featureCost = featureCost + tour;
       } else {
-        console.log('no tour');
+        // console.log('no tour');
         featureCost = featureCost - tour;
       }
     }
     if (featureId === 6) {
       if (isChecked === true) {
-        console.log('snacks');
+        // console.log('snacks');
         featureCost = featureCost + snacks;
       } else {
-        console.log('no snacks');
+        // console.log('no snacks');
         featureCost = featureCost - snacks;
       }
     }
@@ -79,43 +79,6 @@ features.forEach((feature) => {
     // total.textContent = `${totalCost} $`;
   });
 });
-
-/* const calculateFeatures = (feature) => {
-  let isChecked = feature.checked;
-  let featureId = parseInt(feature.value);
-
-  if (featureId === 4) {
-    if (isChecked === true) {
-      console.log('breakfast');
-      featureCost = featureCost + breakfast;
-    } else {
-      console.log('no breakfast');
-      featureCost = featureCost - breakfast;
-    }
-  }
-  if (featureId === 5) {
-    if (isChecked === true) {
-      console.log('tour');
-      featureCost = featureCost + tour;
-    } else {
-      console.log('no tour');
-      featureCost = featureCost - tour;
-    }
-  }
-  if (featureId === 6) {
-    if (isChecked === true) {
-      console.log('snacks');
-      featureCost = featureCost + snacks;
-    } else {
-      console.log('no snacks');
-      featureCost = featureCost - snacks;
-    }
-  }
-  // console.log(featureCost);
-  // totalCost = totalCost + featureCost;
-
-  // total.textContent = `${totalCost} $`;
-}; */
 
 const calculateDays = (room) => {
   const arrivalDay = parseInt(arrival.value.slice(-2));
@@ -168,12 +131,12 @@ form.addEventListener('change', () => {
     roomCost = calculateDays(roomName);
   }
 
-  console.log(featureCost);
-  console.log(roomCost);
+  // console.log(featureCost);
+  // console.log(roomCost);
 
   totalCost = featureCost + roomCost;
 
-  console.log(totalCost);
+  // console.log(totalCost);
 
   total.textContent = `${totalCost} $`;
 });
