@@ -11,6 +11,14 @@ const h3 = document.querySelector('h3');
 const total = document.querySelector('.total-cost p');
 const room = document.querySelector('.choose-room');
 const features = document.querySelectorAll('.features input');
+const form = document.querySelector('form');
+const featureBreakfast = document.getElementById('breakfast');
+const featureTour = document.getElementById('tour');
+const featureSnacks = document.getElementById('snacks');
+
+// console.log(featureBreakfast.value);
+// console.log(featureTour.value);
+// console.log(featureSnacks.value);
 
 const budget = 1;
 const standard = 2;
@@ -21,47 +29,93 @@ const tour = 1;
 const snacks = 3;
 
 let roomName = room.value;
+let featureCost = 0;
+let roomCost = 0;
+let totalCost = 0;
+
+let breakfastIsChecked = false;
+let tourIsChecked = false;
+let snacksIsChecked = false;
+// console.log(form);
 // console.log(roomName);
 
-let featureCost = 0;
-
 features.forEach((feature) => {
-  feature.addEventListener('change', () => {
-    console.log(feature.checked);
-    console.log(feature.value);
+  feature.addEventListener('click', () => {
+    let isChecked = feature.checked;
+    let featureId = parseInt(feature.value);
 
-    if (feature.value === 4) {
-      featureCost = featureCost + breakfast;
+    console.log(isChecked, featureId);
+
+    if (featureId === 4) {
+      if (isChecked === true) {
+        console.log('breakfast');
+        featureCost = featureCost + breakfast;
+      } else {
+        console.log('no breakfast');
+        featureCost = featureCost - breakfast;
+      }
     }
-    if (feature.value === 5) {
-      featureCost = featureCost + tour;
+    if (featureId === 5) {
+      if (isChecked === true) {
+        console.log('tour');
+        featureCost = featureCost + tour;
+      } else {
+        console.log('no tour');
+        featureCost = featureCost - tour;
+      }
     }
-    if (feature.value === 6) {
-      featureCost = featureCost + snacks;
+    if (featureId === 6) {
+      if (isChecked === true) {
+        console.log('snacks');
+        featureCost = featureCost + snacks;
+      } else {
+        console.log('no snacks');
+        featureCost = featureCost - snacks;
+      }
     }
-    console.log(featureCost);
+    // console.log(featureCost);
+    // totalCost = totalCost + featureCost;
+
+    // total.textContent = `${totalCost} $`;
   });
 });
 
-room.addEventListener('change', () => {
-  roomName = room.value;
-  console.log(roomName);
-  if (arrival.value != '' && departure.value != '') {
-    calculateDays(roomName);
-  }
-});
+/* const calculateFeatures = (feature) => {
+  let isChecked = feature.checked;
+  let featureId = parseInt(feature.value);
 
-arrival.addEventListener('change', () => {
-  if (arrival.value != '' && departure.value != '') {
-    calculateDays(roomName);
+  if (featureId === 4) {
+    if (isChecked === true) {
+      console.log('breakfast');
+      featureCost = featureCost + breakfast;
+    } else {
+      console.log('no breakfast');
+      featureCost = featureCost - breakfast;
+    }
   }
-});
+  if (featureId === 5) {
+    if (isChecked === true) {
+      console.log('tour');
+      featureCost = featureCost + tour;
+    } else {
+      console.log('no tour');
+      featureCost = featureCost - tour;
+    }
+  }
+  if (featureId === 6) {
+    if (isChecked === true) {
+      console.log('snacks');
+      featureCost = featureCost + snacks;
+    } else {
+      console.log('no snacks');
+      featureCost = featureCost - snacks;
+    }
+  }
+  // console.log(featureCost);
+  // totalCost = totalCost + featureCost;
 
-departure.addEventListener('change', () => {
-  if (arrival.value != '' && departure.value != '') {
-    calculateDays(roomName);
-  }
-});
+  // total.textContent = `${totalCost} $`;
+}; */
 
 const calculateDays = (room) => {
   const arrivalDay = parseInt(arrival.value.slice(-2));
@@ -79,7 +133,7 @@ const calculateDays = (room) => {
     costPerDay = luxury;
   }
 
-  console.log(totalDays, room, costPerDay);
+  // console.log(totalDays, room, costPerDay);
 
   if (totalDays >= 5) {
     totalCost = costPerDay * totalDays - costPerDay;
@@ -87,11 +141,39 @@ const calculateDays = (room) => {
     totalCost = costPerDay * totalDays;
   }
 
-  console.log(totalCost);
+  // console.log(totalCost);
 
   if (totalDays < 0) {
-    total.textContent = `0`;
+    // total.textContent = `0`;
+    return 0;
   } else {
-    total.textContent = `${totalCost} $`;
+    // total.textContent = `${totalCost} $`;
+    return totalCost;
   }
 };
+
+form.addEventListener('change', () => {
+  roomName = room.value;
+  // console.log(roomName);
+
+  if (arrival.value != '' && departure.value != '') {
+    roomCost = calculateDays(roomName);
+  }
+
+  if (arrival.value != '' && departure.value != '') {
+    roomCost = calculateDays(roomName);
+  }
+
+  if (arrival.value != '' && departure.value != '') {
+    roomCost = calculateDays(roomName);
+  }
+
+  console.log(featureCost);
+  console.log(roomCost);
+
+  totalCost = featureCost + roomCost;
+
+  console.log(totalCost);
+
+  total.textContent = `${totalCost} $`;
+});
