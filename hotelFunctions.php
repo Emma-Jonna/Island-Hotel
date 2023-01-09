@@ -107,6 +107,20 @@ function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFea
     }
 }
 
+function noFeatures(int $inserted_id)
+{
+    $db = connect('database.db');
+
+    $statement = $db->prepare(
+        "INSERT INTO reservation_features (reservation_id, type_id)
+        VALUES (?, NULL);"
+    );
+
+    $statement->bindParam(1, $inserted_id, PDO::PARAM_STR);
+
+    $statement->execute();
+}
+
 function createReservation(string $arrivalDate, string $departureDate, int $roomNumber)
 {
     $db = connect('database.db');
@@ -229,7 +243,16 @@ function receipt($reservationId)
     $db = connect('database.db');
 
     $statement = $db->prepare(
-        "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST((JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1) AS int) AS days_booked, info.additional_info
+        /* "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST((JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1) AS int) AS days_booked, info.additional_info
+        FROM reservations
+        INNER JOIN user_data
+        on reservations.id = user_data.reservation_id
+        INNER JOIN pricelist
+        on pricelist.id = reservations.room_id
+        INNER JOIN info
+        on reservations.info_id = info.id
+        WHERE reservations.id = ?;" */
+        "SELECT info.island, info.hotel, arrival_date, departure_date, total_cost, info.stars, info.additional_info
         FROM reservations
         INNER JOIN user_data
         on reservations.id = user_data.reservation_id
@@ -311,7 +334,7 @@ function featuresToReceipt($reservationId)
     $features = [];
 
     $statement = $db->prepare(
-        "SELECT pricelist.name as feature, pricelist.price
+        "SELECT pricelist.name, pricelist.price as cost
     FROM reservation_features
     INNER JOIN pricelist
     on pricelist.id = reservation_features.type_id

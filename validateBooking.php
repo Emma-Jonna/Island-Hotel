@@ -43,32 +43,21 @@ if (!(count($errors) === 0)) {
 
     $days = ($departure[2] - $arrival[2]) + 1;
     $totalCost = 0;
-    // echo "init" . var_dump($totalCost) . "<br>";
 
-    if ($days >= 5) {
+    if ($days >= 4) {
         $totalCost = ($roomPrice * $days) - $roomPrice;
-        // echo "more than 5 days" . var_dump($totalCost) . "<br>";
     } else {
         $totalCost = $roomPrice * $days;
-        // var_dump($totalCost) . "<br>";
     }
 
     if (isset($_POST['features'])) {
         $features = $_POST['features'];
 
         foreach ($features as $feature) {
-            // var_dump($feature);
-            // echo "feature1" .  var_dump($totalCost) . "<br>";
             $featureCost = checkPrice($feature);
-            // echo "featureCost " . $featureCost . "feature id " . $feature . "total cost " . $totalCost . "<br>";
-            // echo "feature price:" . $featureTotal;
+
             $totalCost = $totalCost + $featureCost;
-            // echo "feature2" .  var_dump($totalCost) . "<br>";
         }
-
-
-        // echo "total with features" . var_dump($totalCost) . "<br>";
-        // var_dump($totalCost);
     }
 
     $bookings = checkIfBooked($arrivalDate, $departureDate, $roomNumber);
@@ -122,6 +111,8 @@ if (!(count($errors) === 0)) {
                 // checks wich features are choosen
                 if (isset($_POST['features'])) {
                     insertFeatures($insertId, $_POST['features'], count($_POST['features']));
+                } else {
+                    noFeatures($insertId);
                 }
 
                 $client = new Client();
