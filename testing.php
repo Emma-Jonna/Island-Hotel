@@ -1,160 +1,227 @@
 <?php
 require("./hotelFunctions.php");
 
-function receipt($reservationId)
-{
-    $db = connect('database.db');
+$db = connect('database.db');
 
-    $statement = $db->prepare(
-        "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST((JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1) AS int) AS days_booked, info.additional_info
-        FROM reservations
-        INNER JOIN user_data
-        on reservations.id = user_data.reservation_id
-        INNER JOIN pricelist
-        on pricelist.id = reservations.room_id
-        INNER JOIN info
-        on reservations.info_id = info.id
-        WHERE reservations.id = ?;"
-    );
-
-    $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
-
-    $statement->execute();
-
-    $receipt = $statement->fetch(PDO::FETCH_ASSOC);
-
-    // return $receipt;
-
-    // header("content-type: application/json");
-
-    // $features['features'] = $feature;
-
-    // $feature = json_encode($feature, true);
-
-    // print_r($features);
-
-
-    // var_dump($feature);
-
-    // echo $feature['features'];
-
-    // echo $features;
-    $feature = featuresToReceipt($reservationId);
-
-    $info = $receipt;
-
-    // $info = json_encode($info, true);
-    $info['features'] = $feature;
-
-    // $info = array_push($info, 'features', $features['features']);
-    // $info = json_decode($info, true);
-    // var_dump($info);
-
-    // array_merge($features, $info);
-
-    // $newArray = $info + $features['features'];
-
-    // var_dump($info);
-    // print_r($info);
-
-
-    // var_dump($info);
-
-    // echo $info;
-
-
-    // var_dump($info);
-
-    $info = json_encode($info, true);
-
-    // var_dump($info);
-
-    // var_dump($info);
-
-    // array_push($info, $features);
-
-    // var_dump($info);
-
-    // $info = json_encode($info, true);
-
-    // echo $info;
-    return $info;
-};
-
-function featuresToReceipt($reservationId)
-{
-    $db = connect('database.db');
-
-    $features = [];
-
-    $statement = $db->prepare(
-        "SELECT pricelist.name as feature, pricelist.price
-    FROM reservation_features
-    INNER JOIN pricelist
+$statement = $db->prepare(
+    "SELECT info.island, info.hotel, arrival_date, departure_date, total_cost, info.stars, pricelist.name as features, pricelist.price as cost, info.additional_info
+    FROM reservations
+    INNER JOIN user_data
+    on reservations.id = user_data.reservation_id
+    LEFT JOIN reservation_features
+    on reservation_features.reservation_id = reservations.id
+    LEFT JOIN pricelist
     on pricelist.id = reservation_features.type_id
-    WHERE reservation_id = ? and pricelist.id > 3"
-    );
+    INNER JOIN info
+    on reservations.info_id = info.id
+    WHERE reservation_features.reservation_id = 3 and (pricelist.id > 3 or reservation_features.type_id is null);"
+);
 
-    $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
-    // $statement->bindParam(1, $arrivalDate, PDO::PARAM_STR);
+// $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
 
-    $statement->execute();
+$statement->execute();
 
-    $feature = $statement->fetchAll(PDO::FETCH_ASSOC);
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    return $feature;
+$features = [];
+$newreceipt = [];
+
+header('Content-Type: application/json');
+
+
+
+foreach ($result as $key => $values) {
+    $feature = [];
+    foreach ($values as $name => $value) {
+        if ($name === "features" && !(is_null($value))) {
+            $feature += ["name" => $value];
+        } elseif ($name === "cost" && !(is_null($value))) {
+            $feature += ["cost" => $value];
+        }
+        // print_r($name);
+    }
+    array_push($features, $feature);
+    // $allFeatures = $features;
+
+    /* foreach ($result as $key => $values) {
+        foreach ($values as $name => $value) {
+            if ($name === "features") {
+                if (is_null($value)) {
+                    $newreceipt += [$name => ""];
+                } else {
+                    // $newreceipt += [$name => $allFeatures];
+                    array_push($newreceipt, $features);
+                }
+            }
+            if ($name !== "cost") {
+                $newreceipt += [$name => $value];
+            }
+        }
+        if (count($newreceipt) === 1) {
+            break;
+        }
+    } */
+
+    // print_r($feature);
 }
 
-header("content-type: application/json");
+// print_r($result);
 
-// $features['features'] = $feature;
+// echo json_encode($features);
 
-// $feature = json_encode($feature, true);
+foreach ($result as $key => $values) {
+    foreach ($values as $name => $value) {
+        // print_r($features);
+        // print_r($name);
+        // echo json_encode($name);
+        if (!($name === "cost")) {
+            if ($name === "features") {
+                if (empty($features)) {
+                    $value = "hello";
+                } else {
+                    $value = $features;
+                }
+            }
+            $newreceipt += [$name => $value];
+        }
+    }
+
+    if (count($result) === 2) {
+        break;
+    }
+    // echo count($result);
+    // print_r($values);
+}
+// echo count($result);
 
 // print_r($features);
+// print_r($allFeatures);
+// print_r($newreceipt);
 
 
-// var_dump($feature);
+/* foreach ($result as $key => $values) {
+    $feature = [];
+    foreach ($values as $name => $value) {
+        if ($name === "features") {
+            $feature += ["name" => $value];
+        } elseif ($name === "cost") {
+            $feature += ["cost" => $value];
+        }
+        // print_r($name);
+    }
+    array_push($features, $feature);
+    $allFeatures = $features;
 
-// echo $feature['features'];
+    foreach ($result as $key => $values) {
+        foreach ($values as $name => $value) {
+            if ($name === "features") {
+                if (is_null($value)) {
+                    $newreceipt += [$name => ""];
+                } else {
+                    $newreceipt += [$name => $allFeatures];
+                }
+            }
+            if ($name !== "cost") {
+                $newreceipt += [$name => $value];
+            }
+        }
+        if (count($newreceipt) === 1) {
+            // break;
+        }
+    }
+} */
 
-// echo $features;
-$feature = featuresToReceipt(2);
+// print_r($allFeatures);
+// print_r($newreceipt);
 
-$info = receipt(2);
+/* foreach ($result as $key => $values) {
+    $feature = [];
+    foreach ($values as $name => $value) {
+        if ($name === "features") {
+            $feature += ["name" => $value];
+        } elseif ($name === "cost") {
+            $feature += ["cost" => $value];
+        }
+        // print_r($name);
+    }
+    array_push($features, $feature);
+    $allFeatures = $features;
 
-// $info = json_encode($info, true);
-$info['features'] = $feature;
+    foreach ($result as $key => $values) {
+        foreach ($values as $name => $value) {
+            if ($name === "features") {
+                if (is_null($value)) {
+                    $newreceipt += [$name => ""];
+                } else {
+                    $newreceipt += [$name => $allFeatures];
+                }
+            }
+            if ($name !== "cost") {
+                $newreceipt += [$name => $value];
+            }
+        }
+        if (count($newreceipt) === 1) {
+            break;
+        }
+    }
+} */
 
-// $info = array_push($info, 'features', $features['features']);
-// $info = json_decode($info, true);
-// var_dump($info);
-
-// array_merge($features, $info);
-
-// $newArray = $info + $features['features'];
-
-// var_dump($info);
-// print_r($info);
 
 
-// var_dump($info);
-
-// echo $info;
 
 
-// var_dump($info);
+/* if (count($result) > 1) {
+    foreach ($result as $values) {
+        $feature = [];
+        foreach ($values as $name => $value) {
+            if ($name === "features") {
+                $feature += ["name" => $value];
+            } elseif ($name === "cost") {
+                $feature += ["cost" => $value];
+            }
+            // print_r($name);
+        }
+        array_push($features, $feature);
+    }
+    // print_r($feature);
+    // print_r($features);
+    // $allFeatures = json_encode($features);
+    $allFeatures = $features;
 
-$info = json_encode($info, true);
+    foreach ($result as $key => $values) {
+        foreach ($values as $name => $value) {
+            if ($name === "features") {
+                $newreceipt += [$name => $allFeatures];
+            } elseif ($name === "cost") {
+            } else {
+                $newreceipt += [$name => $value];
+            }
+        }
 
-// var_dump($info);
+        if (count($newreceipt) === 1) {
+            break;
+        }
+    }
+} else {
+    foreach ($result as $array => $values) {
+        $feature = [];
+        foreach ($values as $name => $value) {
+            if (is_null($value)) {
+                $value = "";
+            } else if ($name === "features") {
+                $newreceipt += [$name => $allFeatures];
+            } elseif ($name === "cost") {
+            } else {
+                $newreceipt += [$name => $value];
+            }
 
-// var_dump($info);
+            if (count($newreceipt) === 1) {
+                break;
+            }
+        }
+    }
+} */
 
-// array_push($info, $features);
-
-// var_dump($info);
-
-// $info = json_encode($info, true);
-
-echo $info;
+// header('Content-Type: application/json');
+// print_r($newreceipt);
+echo json_encode($newreceipt);
