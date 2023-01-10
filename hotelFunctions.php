@@ -23,7 +23,6 @@ function connect(string $dbName): object
         $db = new PDO($db);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        // echo "Connected to the database";
     } catch (PDOException $e) {
         echo "Failed to connect to the database";
         throw $e;
@@ -46,8 +45,6 @@ function checkPrice($priceId): int
     $statement->execute();
 
     $priceList =  $statement->fetch(PDO::FETCH_ASSOC);
-
-    // echo "feature price:" . $priceList['price'];
 
     return $priceList['price'];
 }
@@ -209,125 +206,67 @@ function showAvailability(int $room_id)
     return $reservations;
 }
 
-/* function receipt($reservationId)
-{
-    $db = connect('database.db');
-
-    $statement = $db->prepare(
-        "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST((JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1) AS int) AS days_booked, info.additional_info
-        FROM reservations
-        INNER JOIN user_data
-        on reservations.id = user_data.reservation_id
-        INNER JOIN pricelist
-        on pricelist.id = reservations.room_id
-        INNER JOIN info
-        on reservations.info_id = info.id
-        WHERE reservations.id = ?;"
-    );
-
-    $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
-
-    $statement->execute();
-
-    $receipt = $statement->fetch(PDO::FETCH_ASSOC);
-
-    return $receipt;
-}; */
-
-
-
-
-
 function receipt($reservationId)
 {
     $db = connect('database.db');
 
     $statement = $db->prepare(
-        /* "SELECT info.island, info.hotel, info.stars, user_data.name, arrival_date, departure_date, pricelist.name as room, total_cost, CAST((JULIANDAY(departure_date) - JULIANDAY(arrival_date) +1) AS int) AS days_booked, info.additional_info
-        FROM reservations
-        INNER JOIN user_data
-        on reservations.id = user_data.reservation_id
-        INNER JOIN pricelist
-        on pricelist.id = reservations.room_id
-        INNER JOIN info
-        on reservations.info_id = info.id
-        WHERE reservations.id = ?;" */
-        "SELECT info.island, info.hotel, arrival_date, departure_date, total_cost, info.stars, info.additional_info
-        FROM reservations
-        INNER JOIN user_data
-        on reservations.id = user_data.reservation_id
-        INNER JOIN pricelist
-        on pricelist.id = reservations.room_id
-        INNER JOIN info
-        on reservations.info_id = info.id
-        WHERE reservations.id = ?;"
+        "SELECT info.island, info.hotel, arrival_date, departure_date, total_cost, info.stars, pricelist.name as features, pricelist.price as cost, info.additional_info
+    FROM reservations
+    INNER JOIN user_data
+    on reservations.id = user_data.reservation_id
+    LEFT JOIN reservation_features
+    on reservation_features.reservation_id = reservations.id
+    LEFT JOIN pricelist
+    on pricelist.id = reservation_features.type_id
+    INNER JOIN info
+    on reservations.info_id = info.id
+    WHERE reservation_features.reservation_id = ? and (pricelist.id > 3 or reservation_features.type_id is null);"
     );
 
     $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
 
     $statement->execute();
 
-    $receipt = $statement->fetch(PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    // return $receipt;
+    $features = [];
+    $newreceipt = [];
 
-    // header("content-type: application/json");
+    foreach ($result as $key => $values) {
+        $feature = [];
+        foreach ($values as $name => $value) {
+            if ($name === "features" && !(is_null($value))) {
+                $feature += ["name" => $value];
+            } elseif ($name === "cost" && !(is_null($value))) {
+                $feature += ["cost" => $value];
+            }
+        }
+        array_push($features, $feature);
+    }
 
-    // $features['features'] = $feature;
+    foreach ($result as $key => $values) {
+        foreach ($values as $name => $value) {
+            if (!($name === "cost")) {
+                if ($name === "features") {
+                    if (empty($features)) {
+                        $value = "";
+                    } else {
+                        $value = $features;
+                    }
+                }
+                $newreceipt += [$name => $value];
+            }
+        }
 
-    // $feature = json_encode($feature, true);
+        if (count($result) === 2) {
+            break;
+        }
+    }
+    return $newreceipt;
+}
 
-    // print_r($features);
-
-
-    // var_dump($feature);
-
-    // echo $feature['features'];
-
-    // echo $features;
-    $feature = featuresToReceipt($reservationId);
-
-    $info = $receipt;
-
-    // $info = json_encode($info, true);
-    $info['features'] = $feature;
-
-    // $info = array_push($info, 'features', $features['features']);
-    // $info = json_decode($info, true);
-    // var_dump($info);
-
-    // array_merge($features, $info);
-
-    // $newArray = $info + $features['features'];
-
-    // var_dump($info);
-    // print_r($info);
-
-
-    // var_dump($info);
-
-    // echo $info;
-
-
-    // var_dump($info);
-
-    // $info = json_encode($info, true);
-
-    // var_dump($info);
-
-    // var_dump($info);
-
-    // array_push($info, $features);
-
-    // var_dump($info);
-
-    // $info = json_encode($info, true);
-
-    // echo $info;
-    return $info;
-};
-
-function featuresToReceipt($reservationId)
+/* function featuresToReceipt($reservationId)
 {
     $db = connect('database.db');
 
@@ -349,7 +288,7 @@ function featuresToReceipt($reservationId)
     $feature = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $feature;
-}
+} */
 
 // only for testing
 function printReservations($roomNr)

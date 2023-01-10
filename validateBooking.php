@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require("./hotelFunctions.php");
 require "./vendor/autoload.php";
 
@@ -35,7 +37,7 @@ if (!(count($errors) === 0)) {
     require("errors.php");
 } else {
     // checks wich room that is choosen
-    $roomNumber = $_POST['room'];
+    $roomNumber = (int) $_POST['room'];
     $roomPrice = checkPrice($_POST['room']);
 
     $arrival = explode("-", $arrivalDate);
