@@ -25,21 +25,6 @@ require("./hotelFunctions.php");
     $standard = showAvailability(2);
     $luxury = showAvailability(3);
     ?>
-    <!-- <div class="font-tests">
-        <h1>UnifrakturCook</h1>
-        <p class="one">Vollkorn-Regular</p>
-        <p class="two">Vollkorn-Regular-Italic</p>
-        <p class="three">Vollkorn-Medium</p>
-        <p class="four">Vollkorn-Medium-Italic</p>
-        <p class="five">Vollkorn-SemiBold</p>
-        <p class="six">Vollkorn-SemiBold-Italic</p>
-        <p class="seven">Vollkorn-Bold</p>
-        <p class="eight">Vollkorn-Bold-Italic</p>
-        <p class="nine">Vollkorn-ExtraBold</p>
-        <p class="ten">Vollkorn-ExtraBold-Italic</p>
-        <p class="eleven">Vollkorn-Black</p>
-        <p class="twelve">Vollkorn-Black-Italic</p>
-    </div> -->
 
     <header>
         <nav>
