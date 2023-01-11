@@ -2,11 +2,11 @@
 
 # Isle of Sgàil
 
-Some text about your lovely island
+The island i located somewhere in France that you can access with boat twice a day
 
 # The Burnwood Estate
 
-Why not add some info about the hotel of your dreams?
+The Burnwood family is opening upp their castle to the public and is renting out three of their rooms for everyone to enjoy.
 
 # Instructions
 
@@ -14,13 +14,15 @@ If your project requires some installation or similar, please inform your user '
 
 # Code review
 
-1. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-2. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-3. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-4. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-5. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-6. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-7. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-8. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-9. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-10. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
+1. index.php:50-285 - The calendars could probably be created using a few loops.
+2. index.php - Most of the index.php could be created with a few loops, and a few arrays.
+3. script.js:92-102 - You have written the exact same code 3 times.
+4. ISLAND-HOTEL - Try adding more comments to your code
+5. script.js:23-26 - Try to use more descriptive variable names such as "budgetRoomCostPerDay" instead of "budget".
+6. Images - Remember to be consistant with naming, such as capital letter in the start of a name, underscore, and hyphen.
+7. validateBooking 5-6 - Remember to use dir.
+8. hotelFunctions 54-76 - When working with multiple variables, I would recommend giving names to the values such as "$statement->bindParam(:roomNumber, $roomNumber, PDO::PARAM_INT)" leading to "(...)WHERE room_id = :roomNumber(...)" instead of "(...)WHERE room_id = ?(...)".
+9. database.db - Consider using a more descriptive name for your database.
+10. errors.php:20-29 - Using foreach/endforeach makes the code look much better.
+
+Code reviewed by: Douglas Lindahl - https://github.com/DouglasLindahl
