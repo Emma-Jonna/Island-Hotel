@@ -132,7 +132,7 @@ require("./hotelFunctions.php");
                 <div class="room">
                     <div class="room-info">
                         <h3>Budget</h3>
-                        <p class="room-price">1$</p>
+                        <p class="room-price">3$</p>
                         <div class="description">
                             <!-- <p>The room is located in the oldest part of the castle and</p> -->
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam blanditiis quam eligendi voluptatum commodi id libero aperiam beatae eos aut dolore vitae illum mollitia possimus, eaque consectetur ipsum omnis molestiae.</p>
@@ -218,7 +218,7 @@ require("./hotelFunctions.php");
                 <div class="room">
                     <div class="room-info">
                         <h3>Standard</h3>
-                        <p class="room-price">2$</p>
+                        <p class="room-price">5$</p>
                         <div class="description">
                             <!-- <p>The room is a bit better than budget</p> -->
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam blanditiis quam eligendi voluptatum commodi id libero aperiam beatae eos aut dolore vitae illum mollitia possimus, eaque consectetur ipsum omnis molestiae.</p>
@@ -304,7 +304,7 @@ require("./hotelFunctions.php");
                 <div class="room">
                     <div class="room-info">
                         <h3>Luxury</h3>
-                        <p class="room-price">4$</p>
+                        <p class="room-price">7$</p>
                         <div class="description">
                             <!-- <p>This is our most luxourious room we have</p> -->
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam blanditiis quam eligendi voluptatum commodi id libero aperiam beatae eos aut dolore vitae illum mollitia possimus, eaque consectetur ipsum omnis molestiae.</p>
@@ -349,12 +349,12 @@ require("./hotelFunctions.php");
                 <div class="feature">
                     <input type="checkbox" name="features[]" value="4" id="breakfast">
                     <label for="features">Breakfast Buffet: </label>
-                    <p>2$</p>
+                    <p>4$</p>
                 </div>
                 <div class="feature">
                     <input type="checkbox" name="features[]" value="5" id="tour">
                     <label for="features">Castle Tour: </label>
-                    <p>1$</p>
+                    <p>5$</p>
                 </div>
                 <div class="feature">
                     <input type="checkbox" name="features[]" value="6" id="snacks">

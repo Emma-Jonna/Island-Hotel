@@ -11,13 +11,13 @@ const featureTour = document.getElementById('tour');
 const featureSnacks = document.getElementById('snacks');
 
 // rooms
-const budget = 1;
-const standard = 2;
-const luxury = 4;
+const budget = 3;
+const standard = 5;
+const luxury = 7;
 
 //features
-const breakfast = 2;
-const tour = 1;
+const breakfast = 4;
+const tour = 5;
 const snacks = 3;
 
 let roomName = room.value;

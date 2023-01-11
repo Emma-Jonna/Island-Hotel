@@ -1,6 +1,8 @@
 <?php
 require("./hotelFunctions.php");
 
+declare(strict_types=1);
+
 $db = connect('database.db');
 
 $statement = $db->prepare(
