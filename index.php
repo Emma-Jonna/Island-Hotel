@@ -1,6 +1,5 @@
 <?php
 require("./hotelFunctions.php");
-// require 'vendor/autoload.php';
 
 ?>
 
@@ -11,6 +10,7 @@ require("./hotelFunctions.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./Images/Favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./CSS/global.css">
     <link rel="stylesheet" href="./CSS/main.css">
     <link rel="stylesheet" href="./CSS/typography.css">
@@ -22,10 +22,6 @@ require("./hotelFunctions.php");
     <?php $budget = showAvailability(1);
     $standard = showAvailability(2);
     $luxury = showAvailability(3);
-
-    // printReservations($budget);
-    // printReservations($standard);
-    // printReservations($luxury);
     ?>
     <!-- <div class="font-tests">
         <h1>UnifrakturCook</h1>
@@ -136,7 +132,8 @@ require("./hotelFunctions.php");
                         <h3>Budget</h3>
                         <p class="room-price">1$</p>
                         <div class="description">
-                            <p></p>
+                            <p>The room is located in the oldest part of the castle and</p>
+                            <p>If you stay for 4 days or more you get one day for free</p>
                         </div>
                     </div>
                     <div class="room-picture">
@@ -222,6 +219,7 @@ require("./hotelFunctions.php");
                         <p class="room-price">2$</p>
                         <div class="description">
                             <p></p>
+                            <p>If you stay for 4 days or more you get one day for free</p>
                         </div>
                     </div>
                     <div class="room-picture">
@@ -307,6 +305,7 @@ require("./hotelFunctions.php");
                         <p class="room-price">4$</p>
                         <div class="description">
                             <p></p>
+                            <p>If you stay for 4 days or more you get one day for free</p>
                         </div>
                     </div>
                     <div class="room-picture">
@@ -412,10 +411,6 @@ require("./hotelFunctions.php");
 
     const checkDays = (calendar, arrivalDay, departureDay) => {
         for (let i = 0; i < calendar.length; i++) {
-            // console.log(calendar[i].textContent);
-            /* if (calendar[i].textContent === '') {
-                calendar[i].style.backgroundColor = '#5a3e62';
-            } */
             if (calendar[i].textContent >= arrivalDay && calendar[i].textContent <= departureDay) {
                 calendar[i].style.backgroundColor = "#672E2F";
             }
@@ -432,7 +427,6 @@ require("./hotelFunctions.php");
             const departureDay = parseInt(departure.slice(-2));
 
             checkDays(calendar, arrivalDay, departureDay);
-
         }
     }
 

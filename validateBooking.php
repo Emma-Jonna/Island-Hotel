@@ -16,7 +16,7 @@ $departureDate = $_POST['departure'];
 $name = htmlspecialchars($_POST['name'], ENT_QUOTES);
 $transfercode = htmlspecialchars($_POST['transfercode'], ENT_QUOTES);
 
-// checks if the arrival and departutre date is choosen
+// checks if any of the inputfields ar empty or incorrect
 if ($arrivalDate === "") {
     $errors[] = "please choose arrival date";
 }
@@ -46,12 +46,14 @@ if (!(count($errors) === 0)) {
     $days = ($departure[2] - $arrival[2]) + 1;
     $totalCost = 0;
 
+    // calculating the total cost of the room
     if ($days >= 4) {
         $totalCost = ($roomPrice * $days) - $roomPrice;
     } else {
         $totalCost = $roomPrice * $days;
     }
 
+    // calculating the features cost if they are choosen and are then added
     if (isset($_POST['features'])) {
         $features = $_POST['features'];
 

@@ -64,15 +64,6 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
         departure_date >= ?)"
     );
 
-    /* "( (arrival_date<= "2023-01-07" and departure_date >="2023-01-07") or 
-    (arrival_date<= "2023-01-08" and departure_date >="2023-01-08"))"; */
-
-    /* (arrival_date <= '2023-01-05' 
-        or arrival_date < '2023-01-11' )
-        AND 
-        (departure_date > '2023-01-05' or
-        departure_date >'2023-01-11') */
-
     $statement->bindParam(1, $roomNumber, PDO::PARAM_INT);
     $statement->bindParam(2, $arrivalDate, PDO::PARAM_STR);
     $statement->bindParam(3, $departureDate, PDO::PARAM_STR);
@@ -147,27 +138,6 @@ function createReservation(string $arrivalDate, string $departureDate, int $room
 
     return $inserted_id;
 }
-
-/* function calculateCost($inserted_id)
-{
-    $db = connect('database.db');
-
-    $statement = $db->prepare(
-        "SELECT SUM(pricelist.price) as total_cost
-        FROM reservation_features
-        INNER JOIN user_data
-        on reservation_features.reservation_id = user_data.reservation_id
-        INNER JOIN pricelist
-        on type_id = pricelist.id
-        WHERE user_data.reservation_id = ?;"
-    );
-
-    $statement->bindParam(1, $inserted_id, PDO::PARAM_STR);
-
-    $totalCost = $statement->execute();
-
-    return $totalCost;
-} */
 
 function calcTotalCost(int $inserted_id, string $name, string $transfercode, float $totalCost)
 {
@@ -265,30 +235,6 @@ function receipt($reservationId)
     }
     return $newreceipt;
 }
-
-/* function featuresToReceipt($reservationId)
-{
-    $db = connect('database.db');
-
-    $features = [];
-
-    $statement = $db->prepare(
-        "SELECT pricelist.name, pricelist.price as cost
-    FROM reservation_features
-    INNER JOIN pricelist
-    on pricelist.id = reservation_features.type_id
-    WHERE reservation_id = ? and pricelist.id > 3"
-    );
-
-    $statement->bindParam(1, $reservationId, PDO::PARAM_INT);
-    // $statement->bindParam(1, $arrivalDate, PDO::PARAM_STR);
-
-    $statement->execute();
-
-    $feature = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    return $feature;
-} */
 
 // only for testing
 function printReservations($roomNr)

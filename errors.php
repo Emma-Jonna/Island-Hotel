@@ -28,7 +28,7 @@
         ?>
     </div>
     <div class="link-container">
-        <a href="index.php">back to start</a>
+        <a href="index.php">Back to startpage</a>
     </div>
     <?php
     ?>
