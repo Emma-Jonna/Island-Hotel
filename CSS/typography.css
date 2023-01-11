@@ -2,54 +2,6 @@ h1 {
   font-family: 'UnifrakturCook';
 }
 
-.one {
-  font-family: 'Vollkorn-Regular';
-}
-
-.two {
-  font-family: 'Vollkorn-Regular-Italic';
-}
-
-.three {
-  font-family: 'Vollkorn-Medium';
-}
-
-.four {
-  font-family: 'Vollkorn-Medium-Italic';
-}
-
-.five {
-  font-family: 'Vollkorn-SemiBold';
-}
-
-.six {
-  font-family: 'Vollkorn-SemiBold-Italic';
-}
-
-.seven {
-  font-family: 'Vollkorn-Bold';
-}
-
-.eight {
-  font-family: 'Vollkorn-Bold-Italic';
-}
-
-.nine {
-  font-family: 'Vollkorn-ExtraBold';
-}
-
-.ten {
-  font-family: 'Vollkorn-ExtraBold-Italic';
-}
-
-.eleven {
-  font-family: 'Vollkorn-Black';
-}
-
-.twelve {
-  font-family: 'Vollkorn-Black-Italic';
-}
-
 th {
   font-family: 'Vollkorn-Bold';
   font-size: 1.3rem;
