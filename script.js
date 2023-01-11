@@ -25,6 +25,7 @@ let featureCost = 0;
 let roomCost = 0;
 let totalCost = 0;
 
+// eventlistener for every feature that either adds or removes the cost
 features.forEach((feature) => {
   feature.addEventListener('click', () => {
     let isChecked = feature.checked;
@@ -54,6 +55,7 @@ features.forEach((feature) => {
   });
 });
 
+// calculates the total cost of the room
 const calculateDays = (room) => {
   const arrivalDay = parseInt(arrival.value.slice(-2));
   const departureDay = parseInt(departure.value.slice(-2));
@@ -83,6 +85,7 @@ const calculateDays = (room) => {
   }
 };
 
+// eventlistener that listen to if anything changes and updates the total cost in real time
 form.addEventListener('change', () => {
   roomName = room.value;
 

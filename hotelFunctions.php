@@ -49,7 +49,7 @@ function checkPrice($priceId): int
     return $priceList['price'];
 }
 
-function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber)
+function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber): array
 {
     $db = connect('database.db');
 
@@ -109,7 +109,7 @@ function noFeatures(int $inserted_id)
     $statement->execute();
 }
 
-function createReservation(string $arrivalDate, string $departureDate, int $roomNumber)
+function createReservation(string $arrivalDate, string $departureDate, int $roomNumber): int
 {
     $db = connect('database.db');
 
@@ -156,7 +156,7 @@ function calcTotalCost(int $inserted_id, string $name, string $transfercode, flo
     $statement->execute();
 }
 
-function showAvailability(int $room_id)
+function showAvailability(int $room_id): array
 {
     $db = connect('database.db');
 
@@ -176,7 +176,7 @@ function showAvailability(int $room_id)
     return $reservations;
 }
 
-function receipt($reservationId)
+function receipt($reservationId): array
 {
     $db = connect('database.db');
 
@@ -203,7 +203,7 @@ function receipt($reservationId)
     $features = [];
     $newreceipt = [];
 
-    foreach ($result as $key => $values) {
+    foreach ($result as $values) {
         $feature = [];
         foreach ($values as $name => $value) {
             if ($name === "features" && !(is_null($value))) {
@@ -234,14 +234,6 @@ function receipt($reservationId)
         }
     }
     return $newreceipt;
-}
-
-// only for testing
-function printReservations($roomNr)
-{
-    foreach ($roomNr as $reservation) {
-        echo $reservation['arrival_date'] . " " . $reservation['departure_date'] . " " . $reservation['room_id'] . "<br>";
-    }
 }
 
 

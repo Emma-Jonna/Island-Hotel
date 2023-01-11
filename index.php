@@ -19,7 +19,9 @@ require("./hotelFunctions.php");
 </head>
 
 <body>
-    <?php $budget = showAvailability(1);
+    <!-- calls a function that connects to the database to get all the reservations for the specific room -->
+    <?php
+    $budget = showAvailability(1);
     $standard = showAvailability(2);
     $luxury = showAvailability(3);
     ?>
@@ -132,8 +134,8 @@ require("./hotelFunctions.php");
                         <h3>Budget</h3>
                         <p class="room-price">1$</p>
                         <div class="description">
-                            <p>The room is located in the oldest part of the castle and</p>
-                            <p>If you stay for 4 days or more you get one day for free</p>
+                            <!-- <p>The room is located in the oldest part of the castle and</p> -->
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam blanditiis quam eligendi voluptatum commodi id libero aperiam beatae eos aut dolore vitae illum mollitia possimus, eaque consectetur ipsum omnis molestiae.</p>
                         </div>
                     </div>
                     <div class="room-picture">
@@ -218,8 +220,8 @@ require("./hotelFunctions.php");
                         <h3>Standard</h3>
                         <p class="room-price">2$</p>
                         <div class="description">
-                            <p></p>
-                            <p>If you stay for 4 days or more you get one day for free</p>
+                            <!-- <p>The room is a bit better than budget</p> -->
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam blanditiis quam eligendi voluptatum commodi id libero aperiam beatae eos aut dolore vitae illum mollitia possimus, eaque consectetur ipsum omnis molestiae.</p>
                         </div>
                     </div>
                     <div class="room-picture">
@@ -304,8 +306,8 @@ require("./hotelFunctions.php");
                         <h3>Luxury</h3>
                         <p class="room-price">4$</p>
                         <div class="description">
-                            <p></p>
-                            <p>If you stay for 4 days or more you get one day for free</p>
+                            <!-- <p>This is our most luxourious room we have</p> -->
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam blanditiis quam eligendi voluptatum commodi id libero aperiam beatae eos aut dolore vitae illum mollitia possimus, eaque consectetur ipsum omnis molestiae.</p>
                         </div>
                     </div>
                     <div class="room-picture">
@@ -372,10 +374,14 @@ require("./hotelFunctions.php");
                 <input class="transfer-code" type="text" name="transfercode">
             </div>
 
-            <div class="from-button">
+            <div class="form-button">
                 <button class="submit-button" type="submit" name="submit">
                     Make reservation
                 </button>
+            </div>
+
+            <div class="offer">
+                <p>If you stay for 4 days or more you get one day for free</p>
             </div>
 
         </form>
@@ -388,6 +394,7 @@ require("./hotelFunctions.php");
 
 </body>
 <script src="./script.js"></script>
+<!-- javascript that shows the availability of the rooms with the information from the database -->
 <script type="text/javascript">
     const budgetBookings = <?php echo json_encode($budget) ?>;
     const standardBookings = <?php echo json_encode($standard); ?>;
