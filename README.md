@@ -2,11 +2,11 @@
 
 # Isle of Sgàil
 
-Some text about your lovely island
+The island i located somewhere in France that you can access with boat twice a day
 
 # The Burnwood Estate
 
-Why not add some info about the hotel of your dreams?
+The Burnwood family is opening upp their castle to the public and is renting out three of their rooms for everyone to enjoy.
 
 # Instructions
 
