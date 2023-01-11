@@ -25,7 +25,7 @@ let featureCost = 0;
 let roomCost = 0;
 let totalCost = 0;
 
-// eventlistener for every feature that either adds or removes the cost
+// eventlistener for every feature that either adds or removes from the total cost
 features.forEach((feature) => {
   feature.addEventListener('click', () => {
     let isChecked = feature.checked;

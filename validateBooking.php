@@ -110,7 +110,7 @@ if (!(count($errors) === 0)) {
 
                 $insertId = createReservation($arrivalDate, $departureDate, $roomNumber);
 
-                calcTotalCost($insertId, $name, $transfercode, $totalCost);
+                userInformation($insertId, $name, $transfercode, $totalCost);
 
                 // checks wich features are choosen
                 if (isset($_POST['features'])) {

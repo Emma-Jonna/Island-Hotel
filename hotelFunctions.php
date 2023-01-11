@@ -30,6 +30,7 @@ function connect(string $dbName): object
     return $db;
 }
 
+// gets the prices from the database and returns it
 function checkPrice($priceId): int
 {
     $db = connect('database.db');
@@ -49,6 +50,7 @@ function checkPrice($priceId): int
     return $priceList['price'];
 }
 
+// checks if a room is already booked
 function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumber): array
 {
     $db = connect('database.db');
@@ -78,6 +80,7 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
     return $reservations;
 }
 
+// takes the features choosen from the form (if the customer has added one or more) the room number and inserts them in the database
 function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFeatures)
 {
     $db = connect('database.db');
@@ -95,6 +98,7 @@ function insertFeatures(int $inserted_id, array $featuresArray, int $numberOfFea
     }
 }
 
+// same as the function insertFeatures but will only be called if the customer didn't choose a feature
 function noFeatures(int $inserted_id)
 {
     $db = connect('database.db');
@@ -109,6 +113,7 @@ function noFeatures(int $inserted_id)
     $statement->execute();
 }
 
+// creates a reservation and adds it to the database
 function createReservation(string $arrivalDate, string $departureDate, int $roomNumber): int
 {
     $db = connect('database.db');
@@ -139,7 +144,8 @@ function createReservation(string $arrivalDate, string $departureDate, int $room
     return $inserted_id;
 }
 
-function calcTotalCost(int $inserted_id, string $name, string $transfercode, float $totalCost)
+// with the reservation id it stores all the customers data in the database
+function userInformation(int $inserted_id, string $name, string $transfercode, float $totalCost)
 {
     $db = connect('database.db');
 
@@ -156,6 +162,7 @@ function calcTotalCost(int $inserted_id, string $name, string $transfercode, flo
     $statement->execute();
 }
 
+// it retreives all bokkings from the choosen room and is used in the index file to show which rooms are book with javascript
 function showAvailability(int $room_id): array
 {
     $db = connect('database.db');
@@ -176,6 +183,7 @@ function showAvailability(int $room_id): array
     return $reservations;
 }
 
+// creates a receipt with information from the form
 function receipt($reservationId): array
 {
     $db = connect('database.db');
