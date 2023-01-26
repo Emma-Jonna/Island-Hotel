@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 require("./hotelFunctions.php");
-require "./vendor/autoload.php";
+require __DIR__ . "/vendor/autoload.php";
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -56,6 +56,7 @@ if (!(count($errors) === 0)) {
     // calculating the features cost if they are choosen and are then added
     if (isset($_POST['features'])) {
         $features = $_POST['features'];
+
 
         foreach ($features as $feature) {
             $featureCost = checkPrice($feature);
@@ -125,7 +126,7 @@ if (!(count($errors) === 0)) {
                 ];
                 $options = [
                     'form_params' => [
-                        'user' => 'Johanna',
+                        'user' => 'Robin',
                         'transferCode' => $transfercode
                     ]
                 ];

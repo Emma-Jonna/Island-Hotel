@@ -45,6 +45,11 @@ a {
   font-size: 2rem;
 }
 
+li a {
+  font-family: 'UnifrakturCook';
+  font-size: 3rem;
+}
+
 .errors p {
   font-family: 'Vollkorn-Medium';
   font-size: 1.5rem;

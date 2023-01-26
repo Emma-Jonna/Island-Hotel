@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-/* 
+/*
 Here's something to start your career as a hotel manager.
 
 One function to connect to the database you want (it will return a PDO object which you then can use.)
     For instance: $db = connect('hotel.db');
                   $db->prepare("SELECT * FROM bookings");
-                  
+
 one function to create a guid,
 and one function to control if a guid is valid.
 */
@@ -45,7 +45,7 @@ function checkPrice($priceId): int
 
     $statement->execute();
 
-    $priceList =  $statement->fetch(PDO::FETCH_ASSOC);
+    $priceList = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $priceList['price'];
 }
@@ -56,12 +56,12 @@ function checkIfBooked(string $arrivalDate, string $departureDate, int $roomNumb
     $db = connect('database.db');
 
     $statement = $db->prepare(
-        "SELECT * 
+        "SELECT *
         FROM reservations
-        WHERE room_id = ? AND 
-        (arrival_date <= ? 
+        WHERE room_id = ? AND
+        (arrival_date <= ?
         or arrival_date <= ?)
-        AND 
+        AND
         (departure_date >= ? or
         departure_date >= ?)"
     );
