@@ -9,6 +9,7 @@ const form = document.querySelector('form');
 const featureBreakfast = document.getElementById('breakfast');
 const featureTour = document.getElementById('tour');
 const featureSnacks = document.getElementById('snacks');
+const adminFeatures = document.querySelectorAll('.admin-feature input');
 
 // rooms
 const budget = 3;
@@ -38,6 +39,7 @@ features.forEach((feature) => {
         featureCost = featureCost - breakfast;
       }
     }
+
     if (featureId === 5) {
       if (isChecked === true) {
         featureCost = featureCost + tour;
@@ -45,6 +47,7 @@ features.forEach((feature) => {
         featureCost = featureCost - tour;
       }
     }
+
     if (featureId === 6) {
       if (isChecked === true) {
         featureCost = featureCost + snacks;
@@ -52,6 +55,16 @@ features.forEach((feature) => {
         featureCost = featureCost - snacks;
       }
     }
+
+    adminFeatures.forEach((admin) => {
+      if (featureId === parseInt(admin.value)) {
+        if (isChecked === true) {
+          featureCost = featureCost + parseInt(admin.dataset.price);
+        } else {
+          featureCost = featureCost - parseInt(admin.dataset.price);
+        }
+      }
+    });
   });
 });
 

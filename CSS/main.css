@@ -197,7 +197,9 @@ form {
   display: grid;
   grid-template-columns: repeat(5, 2fr) 1fr;
   grid-template-rows: repeat(2, 2fr);
-  margin: 0 40px 0 40px;
+  grid-auto-rows: minmax(2fr, auto);
+  /* margin: 0 40px 0 40px; */
+  width: fit-content;
 }
 
 .name-input,
@@ -279,7 +281,10 @@ form {
 }
 
 .feature label {
+  width: auto;
   white-space: nowrap;
+  position: relative;
+  top: 10px;
 }
 
 .room-info {
@@ -312,10 +317,68 @@ li {
   background-color: var(--color-raisin-black);
 }
 
-.offer p {
-  margin: 0 40px 0 40px;
-}
-
 .description p {
   margin-top: 30px;
+}
+
+/*LOGIN ------------------------> */
+
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-form input,
+label {
+  width: 300px;
+  height: 50px;
+}
+
+.login-button {
+  width: 200px;
+  background-color: var(--old-mauve);
+  height: 50px;
+}
+
+/* ADMIN----------> */
+
+.admin-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin-form {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-container input,
+label {
+  width: 300px;
+  height: 50px;
+}
+
+.admin-container button {
+  background-color: var(--old-mauve);
+  height: 50px;
 }

@@ -1,6 +1,11 @@
 <?php
 require("./hotelFunctions.php");
 
+$db = new PDO('sqlite:database.db');
+$response = $db->query('SELECT * FROM pricelist WHERE type = "admin_feature"');
+$response->execute();
+$result = $response->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +16,10 @@ require("./hotelFunctions.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./Images/Favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./CSS/global.css">
-    <link rel="stylesheet" href="./CSS/main.css">
-    <link rel="stylesheet" href="./CSS/typography.css">
-    <link rel="stylesheet" href="./CSS/fonts.css">
+    <link rel="stylesheet" href="/CSS/global.css">
+    <link rel="stylesheet" href="/CSS/main.css">
+    <link rel="stylesheet" href="/CSS/typography.css">
+    <link rel="stylesheet" href="/CSS/fonts.css">
     <title>Hotel</title>
 </head>
 
@@ -32,6 +37,7 @@ require("./hotelFunctions.php");
                 <li>Home</li>
                 <li>About</li>
                 <li>Contact</li>
+                <li><a href="login.php">Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -301,8 +307,8 @@ require("./hotelFunctions.php");
                 </div>
             </div>
         </div>
-
-        <form action="./validateBooking.php" method="POST">
+        <!-- /validateBooking.php -->
+        <form action="/validateBooking.php" method="POST">
             <div class="name-input">
                 <label for="name">Name</label>
                 <input class="name" type="text" name="name">
@@ -346,6 +352,18 @@ require("./hotelFunctions.php");
                     <label for="features">Snacks Cabinet: </label>
                     <p>3$</p>
                 </div>
+
+                <?php foreach ($result as $res) : ?>
+                    <div class="feature admin-feature">
+                        <input type="checkbox" name="features[]" value="<?php echo $res['id']; ?>" data-price="<?php echo $res['price']; ?>" id="<?php echo $res['name']; ?>">
+                        <label for="features"><?php echo $res['name']; ?> </label>
+                        <p>
+                            <?php echo $res['price']; ?> $
+                        </p>
+                    </div>
+
+                <?php endforeach; ?>
+
             </div>
 
 
